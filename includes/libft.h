@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 16:44:49 by baudiber          #+#    #+#             */
-/*   Updated: 2018/01/14 00:39:27 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/04/09 21:59:18 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
+# define BUFF_SIZE 128
 
 typedef struct	s_list
 {
@@ -101,5 +105,6 @@ size_t			ft_matrixlen(char ***tab);
 char			*ft_strjoinfree(char *s1, char *s2, int val);
 t_list			*ft_newlst(void const *content, size_t content_size);
 char			*ft_strchr_sec(const char *s, int c);
+int				get_next_line(const int fd, char **line);
 
 #endif
