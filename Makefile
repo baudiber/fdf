@@ -6,7 +6,7 @@
 #    By: clrichar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/20 15:08:30 by clrichar          #+#    #+#              #
-#    Updated: 2018/04/09 19:09:40 by baudiber         ###   ########.fr        #
+#    Updated: 2018/04/11 19:00:46 by baudiber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ MLX_DIR			:=			./minilibx
 #------------------------------------------------------------------------------#
 #                                  FILES                                       #
 
-SRC				:=			fdf.c	
+SRC				:=			fdf.c	\
+							parser.c
 
 OBJ				:=			$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 NB				:=			$(words $(SRC))
@@ -110,7 +111,9 @@ fclean: 				clean
 	@printf '\033[33m[ KILL ] %s\n\033[0m' "Fclean of $(NAME) is done ---"
 
 
-re:						fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE)
 
 
 .PHONY: all clean fclean re build cbuild

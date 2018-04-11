@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/11 18:51:35 by baudiber         ###   ########.fr       */
+/*   Created: 2018/04/11 18:50:18 by baudiber          #+#    #+#             */
+/*   Updated: 2018/04/11 18:54:48 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _FDF_H_
-# define _FDF_H_
+#include "fdf.h"
 
-# include "mlx.h"
-# include "libft.h"
-
-typedef struct		s_rows
+void	parser(char *av)
 {
-	char			*line;
-	struct s_rows	*next;
-}					t_rows;
+	int		fd;
+	t_rows	*rows;
 
-typedef struct	s_setup
-{
-	int			ptnb;
-	int			ynb;
-	int			xnb;
-}				t_setup;
-
-void	parser(char *av);
-
-#endif
+	rows = (t_rows *)malloc(sizeof(t_rows));
+	fd = open(av, O_RDONLY);
+	if (fd == -1)
+	{
+		write(1, "open() failed\n", 14);
+		return ;
+	}
+	while ((get_next_line(fd, &rows->line)) > 0)
+	{
+		rows->next = (t_rows *)malloc(sizeof(t_rows));
+		rows = rows->next;
+	}
+}

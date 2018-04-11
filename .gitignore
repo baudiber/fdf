@@ -1,2 +1,6 @@
 a.out
 libft/
+obj/*.o
+.DS*
+*/.DS*
+fdf
