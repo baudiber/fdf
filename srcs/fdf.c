@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 23:18:22 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/11 18:55:35 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/04/12 21:49:43 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		main(int ac, char **av)
 	else
 	{
 		parser(av[1]); 
-		display();
+		//display();
 	}
 	return (0);
 }

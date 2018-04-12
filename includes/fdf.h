@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/11 18:51:35 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/04/12 22:41:33 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 # include "mlx.h"
 # include "libft.h"
+# include <stdio.h>
 
 typedef struct		s_rows
 {
 	char			*line;
+	char			**tab;
 	struct s_rows	*next;
 }					t_rows;
 
