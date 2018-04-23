@@ -32,5 +32,6 @@ typedef struct	s_setup
 }				t_setup;
 
 void	parser(char *av);
+void	ft_errors(int type);
 
 #endif

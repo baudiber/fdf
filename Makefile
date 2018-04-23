@@ -27,7 +27,8 @@ MLX_DIR			:=			./minilibx
 #                                  FILES                                       #
 
 SRC				:=			fdf.c	\
-							parser.c
+							parser.c \
+							errors.c
 
 OBJ				:=			$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 NB				:=			$(words $(SRC))

@@ -12,38 +12,64 @@
 
 #include "fdf.h"
 
-void	parse_lines(t_rows **rows)
+
+int		parse_lines(t_rows **rows)
 {
 	t_rows	*tmp;
+	int		len;
+	int		len2;
 
 	tmp = *rows;
+	len = ft_tablen(tmp->tab);		
 	while (tmp)
 	{
 		tmp = tmp->next;
+		if (!tmp->tab)
+			break;
+		len2 = ft_tablen(tmp->tab);
+		if (len != len2)
+			return (1);
 	}
+//	tmp = *rows;
+//	while (tmp->tab)
+//	{
+//		len = 0;
+//		while (len < len2)
+//		{
+//			//printf("%d\n", ft_get_hexa(tmp->tab[len]));
+//			len++;
+//		}
+//		tmp = tmp->next;
+//	}
+	return (0);
 }
 
 void	parser(char *av)
 {
 	int		fd;
 	t_rows	*rows;
+	t_setup	setup;
 	t_rows	*tmp;
 
 	rows = (t_rows *)malloc(sizeof(t_rows));
+	if (!rows)
+		ft_errors(3);
 	tmp = rows;
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
-	{
-		write(1, "open() failed\n", 14);
-		return ;
-	}
+		ft_errors(1);
 	while ((get_next_line(fd, &tmp->line)) > 0)
 	{
+		setup.ynb++;
 		tmp->tab = ft_strsplit(tmp->line, ' ');
 		tmp->next = (t_rows *)malloc(sizeof(t_rows));
+		if (!tmp->next)
+			ft_errors(3);
 		tmp = tmp->next;
 		tmp->line = NULL;
 	}
 	tmp->next = NULL;
-	parse_lines(&rows);
+	//tmp = NULL ? 
+	if (parse_lines(&rows))
+		ft_errors(2);
 }

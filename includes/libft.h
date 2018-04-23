@@ -106,5 +106,8 @@ char			*ft_strjoinfree(char *s1, char *s2, int val);
 t_list			*ft_newlst(void const *content, size_t content_size);
 char			*ft_strchr_sec(const char *s, int c);
 int				get_next_line(const int fd, char **line);
+unsigned int	ft_get_hexa(char *str);
+unsigned int	ft_strtoui(char *str, char *base);
+int				ft_atoi_base(char *str, char *base);
 
 #endif
