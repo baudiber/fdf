@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/12 22:41:33 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/04/25 18:55:45 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 # include "libft.h"
 # include <stdio.h>
 
+typedef struct		s_point
+{
+	int				x;
+	int				y;
+	unsigned int	color;
+}					t_point;
+
 typedef struct		s_rows
 {
 	char			*line;
@@ -24,14 +31,16 @@ typedef struct		s_rows
 	struct s_rows	*next;
 }					t_rows;
 
-typedef struct	s_setup
+typedef struct		s_setup
 {
-	int			ptnb;
-	int			ynb;
-	int			xnb;
-}				t_setup;
+	struct s_point	*points;
+	int				ptnb;
+	int				ynb;
+}					t_setup;
 
-void	parser(char *av);
+void	parser(char *av, t_setup *setup);
 void	ft_errors(int type);
+void	ft_bresenham(int x0, int y0, int x1, int y1);
+void	ft_wu(int x0, int y0, int x1, int y1);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 23:18:22 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/12 21:49:43 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:44:40 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,30 @@ int		deal_key(int key, void *param)
 	return (0);
 }
 
-void	display(void)
+void	display(t_setup *setup)
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
+	int		i;
+	int		xa = 0;
+	int		ya = 0;
+	int		xb = 800;
+	int		yb = 600;
+
+	//ft_bresenham(xa, ya, xb, yb);
+	ft_wu(xa, ya, xb, yb);
+	i = 0;
+	while (i < setup->ptnb)
+	{
+//		printf("%d\n", setup->points[i].y);
+		i++;
+	}
+}
+
+void	display_splash(void)
+{
 	int		i;
 	unsigned int		j;
+	void	*mlx_ptr;
+	void	*win_ptr;
 
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, 800, 600, "~  <baudiber>'s fdf  ~");
@@ -47,14 +65,17 @@ void	display(void)
 
 int		main(int ac, char **av)
 {
+	t_setup	setup;
+
 	if (ac != 2)
 		ft_putendl("usage : ./fdf <map>");
 	else if (!ft_strstr(av[1], ".fdf"))
 		ft_putendl("wrong file format");
 	else
 	{
-		parser(av[1]); 
-		display();
+		parser(av[1], &setup); 
+		//display_splash();
+		display(&setup);
 	}
 	return (0);
 }

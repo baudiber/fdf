@@ -6,7 +6,7 @@
 #    By: clrichar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/20 15:08:30 by clrichar          #+#    #+#              #
-#    Updated: 2018/04/11 19:00:46 by baudiber         ###   ########.fr        #
+#    Updated: 2018/04/25 19:41:24 by baudiber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ MLX_DIR			:=			./minilibx
 
 SRC				:=			fdf.c	\
 							parser.c \
-							errors.c
+							errors.c \
+							bresenham.c \
+							wu.c
 
 OBJ				:=			$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 NB				:=			$(words $(SRC))

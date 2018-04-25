@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 16:44:49 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/09 21:59:18 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:15:30 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,7 @@ int				get_next_line(const int fd, char **line);
 unsigned int	ft_get_hexa(char *str);
 unsigned int	ft_strtoui(char *str, char *base);
 int				ft_atoi_base(char *str, char *base);
+unsigned int	ft_getcolor(char *str);
+void			ft_swap(int *a, int *b);
 
 #endif
