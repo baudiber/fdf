@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 16:44:49 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/25 19:15:30 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:14:38 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ unsigned int	ft_strtoui(char *str, char *base);
 int				ft_atoi_base(char *str, char *base);
 unsigned int	ft_getcolor(char *str);
 void			ft_swap(int *a, int *b);
+char			*ft_itoa_base(int value, int base);
 
 #endif

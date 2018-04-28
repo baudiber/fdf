@@ -13,43 +13,32 @@
 #include "fdf.h"
 #include <math.h>
 
-double	ipart(int x)
-{
-	return (floor(x));
-}
-
-double	ft_round(int x)
-{
-	return (ipart(x + 0.5));
-}
-
-float	fpart(int x)
-{
-	return (x - floor(x)); 
-}
-
-float	rfpart(int x)
-{
-	return (1 - fpart(x));
-}
+#define ft_ipart(X) ((int)(X))
+#define ft_round(X) ((int)(((double)(X))+ 0.5))
+#define ft_fpart(X) (((double)(X)) - (double)ft_ipart(X))
+#define ft_rfpart(X) (1.0 - ft_fpart(X))
+#define W 0x00FFFFFF
+#define TP 0xFF000000
 
 void	ft_wu(int x0, int y0, int x1, int y1)
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	int		steep;
-	int		dx;
-	int		dy;
-	float	grad;
-	float		xend;
-	float		yend;
-	float		xgap;
-	float		xpxl1;
-	float		ypxl1;
-	float		xpxl2;
-	float		ypxl2;
-	float		intery;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	int			steep;
+	double		dx;
+	double		dy;
+	double		grad;
+	double		xend;
+	double		yend;
+	double		xgap;
+	int			xpxl1;
+	int			ypxl1;
+	int			xpxl2;
+	int			ypxl2;
+	double		intery;
 	int			x;
+	unsigned int	rfcolor;
+	unsigned int	fcolor;
 
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, 800, 600, "~  <baudiber>'s fdf  ~");
@@ -72,52 +61,70 @@ void	ft_wu(int x0, int y0, int x1, int y1)
 		grad = 1;
 	xend = ft_round(x0);
 	yend = y0 + grad * (xend - x0);
-	xgap = rfpart(x0 + 0.5);
+	xgap = ft_rfpart(x0 + 0.5);
 	xpxl1 = xend;
-	ypxl1 = ipart(yend);
+	ypxl1 = ft_ipart(yend);
 	if (steep)
 	{
-		mlx_pixel_put(mlx_ptr, win_ptr, ypxl1, xpxl1, 0xFFFFFF + (rfpart(yend) * xgap) * 0x01000000);
-		mlx_pixel_put(mlx_ptr, win_ptr, ypxl1 + 1, xpxl1, 0xFFFFFF + (fpart(yend) * xgap) * 0x01000000);
+		mlx_pixel_put(mlx_ptr, win_ptr, ypxl1, xpxl1, W + (ft_rfpart(yend) * xgap) * TP);
+		mlx_pixel_put(mlx_ptr, win_ptr, ypxl1 + 1, xpxl1, W + (ft_fpart(yend) * xgap) * TP);
 	}
 	else
 	{
-		mlx_pixel_put(mlx_ptr, win_ptr, ypxl1, xpxl1, 0xFFFFFF + (rfpart(yend) * xgap) * 0x01000000);
-		mlx_pixel_put(mlx_ptr, win_ptr, ypxl1, xpxl1 + 1, 0xFFFFFF + (fpart(yend) * xgap) * 0x01000000);
+		mlx_pixel_put(mlx_ptr, win_ptr, ypxl1, xpxl1, W + (ft_rfpart(yend) * xgap) * TP);
+		mlx_pixel_put(mlx_ptr, win_ptr, ypxl1, xpxl1 + 1, W + (ft_fpart(yend) * xgap) * TP);
 	}
 	intery = yend + grad;
 	xend = ft_round(x1);
 	yend = y1 + grad * (xend - x1);
-	xgap = fpart(x1 + 0.5);
+	xgap = ft_fpart(x1 + 0.5);
 	xpxl2 = xend;
-	ypxl2 = ipart(yend);
+	ypxl2 = ft_ipart(yend);
 	if (steep)
 	{
-		mlx_pixel_put(mlx_ptr, win_ptr, ypxl2, xpxl2, 0xFFFFFF + (rfpart(yend) * xgap) * 0x01000000);
-		mlx_pixel_put(mlx_ptr, win_ptr, ypxl2 + 1, xpxl2, 0xFFFFFF + (fpart(yend) * xgap) * 0x01000000);
+		mlx_pixel_put(mlx_ptr, win_ptr, ypxl2, xpxl2, W + ((ft_rfpart(yend) * xgap) * TP));
+		mlx_pixel_put(mlx_ptr, win_ptr, ypxl2 + 1, xpxl2, W + ((ft_fpart(yend) * xgap) * TP));
 	}
 	else
 	{
-		mlx_pixel_put(mlx_ptr, win_ptr, ypxl2, xpxl2, 0xFFFFFF + (rfpart(yend) * xgap) * 0x01000000);
-		mlx_pixel_put(mlx_ptr, win_ptr, ypxl2, xpxl2 + 1, 0xFFFFFF + (fpart(yend) * xgap) * 0x01000000);
+		mlx_pixel_put(mlx_ptr, win_ptr, ypxl2, xpxl2, W + ((ft_rfpart(yend) * xgap) * TP));
+		mlx_pixel_put(mlx_ptr, win_ptr, ypxl2, xpxl2 + 1, W + ((ft_fpart(yend) * xgap) * TP));
 	}
 	x = xpxl1 + 1;
+// 1.00  = 0x00000000
+// 0.75  = 0x08000000 
+// 0.50  = 0x10000000
+// 0.25  = 0x18000000
 	if (steep)
 	{
-		while (x < xpxl2 - 1)
+		while (x <= xpxl2 - 1)
 		{
-			mlx_pixel_put(mlx_ptr, win_ptr, ipart(intery), x, 0xFFFFFF + rfpart(intery) * 0x01000000);
-			mlx_pixel_put(mlx_ptr, win_ptr, ipart(intery) + 1, x, 0xFFFFFF + fpart(intery) * 0x01000000);
+			printf("%f\n", ft_rfpart(intery));
+			printf("%f\n", ft_fpart(intery));
+			mlx_pixel_put(mlx_ptr, win_ptr, (int)intery, x, W + ft_rfpart(intery));
+			mlx_pixel_put(mlx_ptr, win_ptr, (int)intery + 1, x, W + ft_fpart(intery));
 			intery += grad;
 			x++;
 		}
 	}
 	else
 	{
-		while (x < xpxl2 - 1)
+		while (x <= xpxl2 - 1)
 		{
-			mlx_pixel_put(mlx_ptr, win_ptr, x, ipart(intery),  0xFFFFFF + rfpart(intery) * 0x01000000);
-			mlx_pixel_put(mlx_ptr, win_ptr,  x, ipart(intery) + 1, 0xFFFFFF + fpart(intery) * 0x01000000);
+			if (ft_rfpart(intery) == 1)
+			if (ft_fpart(intery) == 0.25)
+
+			rfcolor = 0x01000000 * ((32 * (ft_rfpart(intery) * 100)) / 100);
+			fcolor = 0x01000000 * ((32 * (ft_fpart(intery) * 100)) / 100);
+
+			//printf("%u    %f\n", (unsigned int)((32 * (ft_rfpart(intery) * 100)) / 100), ft_rfpart(intery));
+			printf("%s\n", ft_itoa_base(rfcolor, 16));
+			//need ftoa
+			//printf("%f\n", ft_rfpart(intery) * 100);
+			//printf("%f\n", ft_fpart(intery) * 100);
+			
+			mlx_pixel_put(mlx_ptr, win_ptr, x, (int)intery,  W + rfcolor);
+			mlx_pixel_put(mlx_ptr, win_ptr,  x, (int)intery + 1, W + fcolor);
 			intery += grad;
 			x++;
 		}

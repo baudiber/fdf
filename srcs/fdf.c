@@ -23,12 +23,12 @@ int		deal_key(int key, void *param)
 void	display(t_setup *setup)
 {
 	int		i;
-	int		xa = 0;
-	int		ya = 0;
-	int		xb = 800;
-	int		yb = 600;
+	int		xa = 100;
+	int		ya = 100;
+	int		xb = 500;
+	int		yb = 150;
 
-	//ft_bresenham(xa, ya, xb, yb);
+//	ft_bresenham(xa, ya, xb, yb);
 	ft_wu(xa, ya, xb, yb);
 	i = 0;
 	while (i < setup->ptnb)
