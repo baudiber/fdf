@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 18:54:58 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/25 19:44:16 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/04/28 18:19:23 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,14 @@ void	ft_wu(int x0, int y0, int x1, int y1)
 			if (ft_fpart(intery) == 0.25)
 
 			rfcolor = 0x01000000 * ((32 * (ft_rfpart(intery) * 100)) / 100);
+			//fcolor = 0x01000000 * ((32 * (ft_fpart(intery) * 100)) / 100);
 			fcolor = 0x01000000 * ((32 * (ft_fpart(intery) * 100)) / 100);
 
 			//printf("%u    %f\n", (unsigned int)((32 * (ft_rfpart(intery) * 100)) / 100), ft_rfpart(intery));
-			printf("%s\n", ft_itoa_base(rfcolor, 16));
-			//need ftoa
+			printf("%s\n", ft_utoa_base(fcolor, 16));
+			printf("%s\n", ft_utoa_base(rfcolor, 16));
+		//	printf("%u\n", rfcolor);
+			//printf("%u\n", fcolor);
 			//printf("%f\n", ft_rfpart(intery) * 100);
 			//printf("%f\n", ft_fpart(intery) * 100);
 			

@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/25 18:55:45 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/04/28 19:23:09 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ typedef struct		s_rows
 typedef struct		s_setup
 {
 	struct s_point	*points;
+	void			*mlx_ptr;
+	void			*win_ptr;
 	int				ptnb;
 	int				ynb;
 }					t_setup;
 
-void	parser(char *av, t_setup *setup);
-void	ft_errors(int type);
-void	ft_bresenham(int x0, int y0, int x1, int y1);
-void	ft_wu(int x0, int y0, int x1, int y1);
+void				parser(char *av, t_setup *setup);
+void				ft_errors(int type);
+void				ft_bresenham(int x0, int y0, int x1, int y1, t_setup *setup);
+void				ft_wu(int x0, int y0, int x1, int y1);
 
 #endif
