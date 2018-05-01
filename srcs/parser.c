@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:54:27 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/25 17:38:17 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/01 15:46:11 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,21 @@ void			get_points(t_rows **rows, t_setup *setup)
 	}
 }
 
+int				check_line(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] != ' ' && str[i] != 'x' && str[i] != ',') && (str[i] < '0' \
+				|| str[i] > '9') && (str[i] < 'A' || str[i] > 'F'))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int				parse_lines(t_rows **rows, t_setup *setup)
 {
 	t_rows	*tmp;
@@ -74,6 +89,7 @@ int				parse_lines(t_rows **rows, t_setup *setup)
 void			parser(char *av, t_setup *setup)
 {
 	int		fd;
+	int		ret;
 	t_rows	*rows;
 	t_rows	*tmp;
 
@@ -85,9 +101,11 @@ void			parser(char *av, t_setup *setup)
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
 		ft_errors(1);
-	while ((get_next_line(fd, &tmp->line)) > 0)
+	while ((ret = get_next_line(fd, &tmp->line)) > 0)
 	{
 		setup->ynb++;
+		if (check_line(tmp->line))
+			ft_errors(2);
 		tmp->tab = ft_strsplit(tmp->line, ' ');
 		tmp->next = (t_rows *)malloc(sizeof(t_rows));
 		if (!tmp->next)
@@ -97,7 +115,7 @@ void			parser(char *av, t_setup *setup)
 	}
 	tmp->next = NULL;
 	//tmp = NULL ? 
-	if (parse_lines(&rows, setup))
+	if (ret == -1 || parse_lines(&rows, setup))
 		ft_errors(2);
 	printf("ptnb: %d\n", setup->ptnb);
 }
