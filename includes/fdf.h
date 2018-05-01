@@ -6,12 +6,14 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/28 19:23:09 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/01 16:26:21 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _FDF_H_
 # define _FDF_H_
+# define W_WIDTH 800
+# define W_HEIGHT 600
 
 # include "mlx.h"
 # include "libft.h"
@@ -31,11 +33,17 @@ typedef struct		s_rows
 	struct s_rows	*next;
 }					t_rows;
 
+
 typedef struct		s_setup
 {
 	struct s_point	*points;
+	int				*data;
+	int				bpx;
+	int				s_line;
+	int				ed;
 	void			*mlx_ptr;
 	void			*win_ptr;
+	void			*img_ptr;
 	int				ptnb;
 	int				ynb;
 }					t_setup;

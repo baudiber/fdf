@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 23:18:22 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/28 19:52:10 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/01 16:41:33 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,30 +57,25 @@ void	display_splash(t_setup *setup)
 {
 	int		i;
 	unsigned int		j;
-	void	*win_ptr;
-	void	*img_ptr;
-	int		data;
-	int		bpx;
-	int		sl;
-	int		endian;
 
-	win_ptr = mlx_new_window(setup->mlx_ptr, 800, 600, "SPLASH SCREEN");
-	img_ptr = mlx_new_image(setup->mlx_ptr, 800, 600);
-	data = (int)mlx_get_data_addr(img_ptr, &bpx, &sl, &endian);
+	setup->win_ptr = mlx_new_window(setup->mlx_ptr, W_WIDTH, W_HEIGHT, "SPLASH SCREEN");
+	setup->img_ptr = mlx_new_image(setup->mlx_ptr, W_WIDTH, W_HEIGHT);
+	setup->data = (int *)mlx_get_data_addr(setup->img_ptr, &setup->bpx, &setup->s_line, &setup->ed);
 	i = 0;
 	j = 0xFFFFFFFF;
-	while (i < 800)
+	while (i < W_WIDTH)
 	{
-		mlx_pixel_put(setup->mlx_ptr, win_ptr, i, 600 / 2, j);
-		if (i < 400 && j > 0x00FFFFFF)
+		setup->data[W_WIDTH * W_HEIGHT / 2 + i] = j;
+		if (i < W_WIDTH / 2 && j > 0x00FFFFFF)
 			j -= 0x01000000;
-		if (i >= 550 && j < 0xFFFFFFFF)
+		if (i >= W_WIDTH - (W_WIDTH * 32 / 100) && j < 0xFFFFFFFF)
 			j += 0x01000000;
 		i++;
 	}
-	mlx_string_put(setup->mlx_ptr, win_ptr, 330, 280, 0xFFFFFF, "Wireframe v0.1");
-	mlx_string_put(setup->mlx_ptr, win_ptr, 290, 400, 0xFFFFFF, "Press Mouse 1 to start");
 	//mlx_mouse_hook(win_ptr, mouse_hook, setup);
+	mlx_put_image_to_window(setup->data, setup->win_ptr, setup->img_ptr, 0, 0);
+	mlx_string_put(setup->mlx_ptr, setup->win_ptr, 330, 280, 0xFFFFFF, "Wireframe v0.1");
+	mlx_string_put(setup->mlx_ptr, setup->win_ptr, 290, 400, 0xFFFFFF, "Press Mouse 1 to start");
 	mlx_loop(setup->mlx_ptr);
 }
 
