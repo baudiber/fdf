@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 18:25:28 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/28 18:40:58 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/04 18:54:33 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_bresenham(int x0, int y0, int x1, int y1, t_setup *setup)
 
 	while (x0 < x1)
 	{
-		mlx_pixel_put(setup->mlx_ptr, setup->win_ptr, x0, y, 0xFFFFFF);
+		setup->data[setup->width * y + x0] = 0xFFFFFF;
+		//mlx_pixel_put(setup->mlx_ptr, setup->win_ptr, x0, y, 0xFFFFFF);
 		if (delta > 0)
 		{
 			y++;
