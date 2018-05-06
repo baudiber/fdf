@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 23:18:22 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/04 18:50:09 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/06 23:51:15 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,21 @@ void	display(t_setup *setup)
 {
 	int		i;
 
-	mlx_destroy_image(setup->mlx_ptr, setup->img_ptr);
+	//mlx_destroy_image(setup->mlx_ptr, setup->img_ptr);
 //	mlx_clear_window(setup->mlx_ptr, setup->win_ptr);
-	mlx_destroy_window(setup->mlx_ptr, setup->win_ptr);
+	//mlx_destroy_window(setup->mlx_ptr, setup->win_ptr);
 	create_window("FDF", 1024, 768, setup);
-	setup->img_ptr = mlx_new_image(setup->mlx_ptr, W_WIDTH, W_HEIGHT);
+	setup->img_ptr = mlx_new_image(setup->mlx_ptr, setup->width, setup->height);
 	setup->data = (int *)mlx_get_data_addr(setup->img_ptr, &setup->bpx, &setup->s_line, &setup->ed);
+	//printf("%d\n", setup->ptnb);
+	//printf("%d\n", setup->ynb);
 	i = 0;
 	while (i < setup->ptnb - 1) 
+	//while (i < 208) 
 	{
-		//ft_bresenham(setup->points[i].x, setup->points[i].y, setup->points[i + 1].x, setup->points[i + 1].y, setup);
-		ft_bresenham(100, 100, 550, 150, setup);
+		ft_bresenham(setup->points[i].x, setup->points[i].y, setup->points[i + 1].x, setup->points[i + 1].y, setup);
+		if (i < i + setup->ptnb / setup->ynb)
+			ft_bresenham(setup->points[i].x, setup->points[i].y, setup->points[i + setup->ptnb / setup->ynb].x, setup->points[i + setup->ptnb / setup->ynb].y, setup);
 		i++;
 	}
 	mlx_put_image_to_window(setup->data, setup->win_ptr, setup->img_ptr, 0, 0);
@@ -65,17 +69,17 @@ void	display_splash(t_setup *setup)
 	int		i;
 	unsigned int		j;
 
-	setup->win_ptr = mlx_new_window(setup->mlx_ptr, W_WIDTH, W_HEIGHT, "SPLASH SCREEN");
-	setup->img_ptr = mlx_new_image(setup->mlx_ptr, W_WIDTH, W_HEIGHT);
+	create_window("BAUDIBER PRESENTS", 800, 600, setup);
+	setup->img_ptr = mlx_new_image(setup->mlx_ptr, setup->width, setup->height);
 	setup->data = (int *)mlx_get_data_addr(setup->img_ptr, &setup->bpx, &setup->s_line, &setup->ed);
 	i = 0;
 	j = 0xFFFFFFFF;
-	while (i < W_WIDTH)
+	while (i < setup->width)
 	{
-		setup->data[W_WIDTH * W_HEIGHT / 2 + i] = j;
-		if (i < W_WIDTH / 2 && j > 0x00FFFFFF)
+		setup->data[setup->width * setup->height / 2 + i] = j;
+		if (i < setup->width / 2 && j > 0x00FFFFFF)
 			j -= 0x01000000;
-		if (i >= W_WIDTH - (W_WIDTH * 32 / 100) && j < 0xFFFFFFFF)
+		if (i >= setup->width - (setup->width * 32 / 100) && j < 0xFFFFFFFF)
 			j += 0x01000000;
 		i++;
 	}
@@ -99,7 +103,7 @@ int		main(int ac, char **av)
 	{
 		setup.mlx_ptr = mlx_init();
 		parser(av[1], &setup); 
-		display_splash(&setup);
+		//display_splash(&setup);
 		display(&setup);
 	}
 	return (0);

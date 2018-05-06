@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:54:27 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/01 15:46:11 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/06 23:49:59 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void			get_points(t_rows **rows, t_setup *setup)
 		while (i < len)
 		{
 			setup->points[ptcnt].color = point_color(tmp->tab[i]);
-			setup->points[ptcnt].x = i;
-			setup->points[ptcnt].y = y;
+			setup->points[ptcnt].x = i * 10;
+			setup->points[ptcnt].y = y * 10;
 			ptcnt++;
 			i++;
 		}
@@ -66,12 +66,11 @@ int				check_line(char *str)
 int				parse_lines(t_rows **rows, t_setup *setup)
 {
 	t_rows	*tmp;
-	int		len;
 	int		len2;
 
 	tmp = *rows;
-	len = ft_tablen(tmp->tab);		
-	setup->ptnb = setup->ynb * len;
+	setup->linelen = ft_tablen(tmp->tab);		
+	setup->ptnb = setup->ynb * setup->linelen;
 	setup->points = (t_point *)malloc(sizeof(t_point) * setup->ptnb);
 	while (tmp)
 	{
@@ -79,7 +78,7 @@ int				parse_lines(t_rows **rows, t_setup *setup)
 		if (!tmp->tab)
 			break;
 		len2 = ft_tablen(tmp->tab);
-		if (len != len2)
+		if (setup->linelen != len2)
 			return (1);
 	}
 	get_points(rows, setup);

@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/04 18:54:43 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/06 23:50:07 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct		s_setup
 	void			*img_ptr;
 	int				ptnb;
 	int				ynb;
+	int				linelen;
 }					t_setup;
 
 void				parser(char *av, t_setup *setup);
