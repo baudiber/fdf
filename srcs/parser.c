@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:54:27 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/06 23:49:59 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/07 18:08:17 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ void			get_points(t_rows **rows, t_setup *setup)
 		while (i < len)
 		{
 			setup->points[ptcnt].color = point_color(tmp->tab[i]);
-			setup->points[ptcnt].x = i * 10;
-			setup->points[ptcnt].y = y * 10;
+			setup->points[ptcnt].x = i * 30;
+			setup->points[ptcnt].y = y * 30;
+			setup->points[ptcnt].z = ft_atoi(tmp->tab[i]);
 			ptcnt++;
 			i++;
 		}
