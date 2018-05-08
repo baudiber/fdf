@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/08 00:20:36 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/08 19:36:33 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct		s_vect
 
 typedef struct		s_quat
 {
-	double			a;
+	double			w;
 	struct s_vect	vect;
 }					t_quat;
 
