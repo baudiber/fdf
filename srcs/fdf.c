@@ -6,44 +6,49 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 23:18:22 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/08 00:29:03 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/09 18:49:09 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		deal_key(int key, void *param)
+void	ft_lookat(t_setup *stp)
 {
-	(void)param;
-	if (key == 53)
-		exit (0);
-	return (0);
+	t_vect	cam;
+	t_vect	forward;
+	t_vect	right;
+	t_vect	up;
+	double	matrix[4][4];
+
+	cam.x = 100;
+	cam.y = -100;
+	cam.z = 400;
 }
 
-
-void	display(t_setup *setup)
+void	display(t_setup *stp)
 {
 	int		i;
 
-	create_window("FDF", 1024, 768, setup);
-	setup->img_ptr = mlx_new_image(setup->mlx_ptr, setup->width, setup->height);
-	setup->data = (int *)mlx_get_data_addr(setup->img_ptr, &setup->bpx, &setup->s_line, &setup->ed);
+	create_window("FDF", 1024, 768, stp);
+	stp->img_ptr = mlx_new_image(stp->mlx_ptr, stp->width, stp->height);
+	stp->data = (int *)mlx_get_data_addr(stp->img_ptr, &stp->bpx, &stp->s_line, &stp->ed);
 	i = 0;
-	while (i < setup->ptnb - 1) 
+	while (i < stp->ptnb - 1) 
 	{
-		ft_bresenham(setup->points[i].x, setup->points[i].y, setup->points[i + 1].x, setup->points[i + 1].y, setup);
-		if (i < setup->lastrow)
-			ft_bresenham(setup->points[i].x, setup->points[i].y, setup->points[i + setup->ptnb / setup->ynb].x, setup->points[i + setup->ptnb / setup->ynb].y, setup);
+		ft_bresenham(stp->pts[i].x, stp->pts[i].y, stp->pts[i + 1].x, stp->pts[i + 1].y, stp);
+		if (i < stp->lastrow)
+			ft_bresenham(stp->pts[i].x, stp->pts[i].y, stp->pts[i + stp->ptnb / stp->ynb].x, stp->pts[i + stp->ptnb / stp->ynb].y, stp);
 		i++;
 	}
-	mlx_put_image_to_window(setup->data, setup->win_ptr, setup->img_ptr, 0, 0);
-	mlx_key_hook(setup->win_ptr, deal_key, (void *)0);
-	mlx_loop(setup->mlx_ptr);
+	mlx_put_image_to_window(stp->data, stp->win_ptr, stp->img_ptr, 0, 0);
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 850, 740, 0xF0F0F0, "Press h for help");
+	mlx_key_hook(stp->win_ptr, deal_key, (void *)0);
+	mlx_loop(stp->mlx_ptr);
 }
 
 int		main(int ac, char **av)
 {
-	t_setup	setup;
+	t_setup	stp;
 
 	if (ac != 2)
 		ft_putendl("usage : ./fdf <map>");
@@ -51,12 +56,12 @@ int		main(int ac, char **av)
 		ft_putendl("wrong file format");
 	else
 	{
-		setup.mlx_ptr = mlx_init();
-		parser(av[1], &setup); 
+		stp.mlx_ptr = mlx_init();
+		parser(av[1], &stp); 
 		//printf("test\n");
-		env_points(&setup);
-		//display_splash(&setup);
-		display(&setup);
+		env_points(&stp);
+		display_splash(&stp);
+		display(&stp);
 	}
 	return (0);
 }

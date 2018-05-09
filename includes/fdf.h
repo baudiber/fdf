@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/08 19:36:33 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:29:07 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,11 @@ typedef struct		s_rows
 
 typedef struct		s_setup
 {
-	struct s_point	*points;
+	struct s_point	*pts;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
+	int				ac;
 	int				*data;
 	int				bpx;
 	int				s_line;
@@ -73,6 +74,7 @@ void				create_window(char *str, int width, int height, t_setup *setup);
 void				env_points(t_setup *setup);
 void				display(t_setup *setup);
 int					deal_key(int key, void *param);
+void				display_splash(t_setup *setup);
 t_quat				quaternion_multiplicator(t_quat q0, t_quat q1);
 
 #endif

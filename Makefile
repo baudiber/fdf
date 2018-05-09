@@ -6,7 +6,7 @@
 #    By: clrichar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/20 15:08:30 by clrichar          #+#    #+#              #
-#    Updated: 2018/05/08 00:16:49 by baudiber         ###   ########.fr        #
+#    Updated: 2018/05/09 18:31:02 by baudiber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SRC				:=			fdf.c	\
 							wu.c \
 							splash.c \
 							env_fts.c \
-							vect&quat.c
+							vect_ops.c \
+							interaction.c
 
 OBJ				:=			$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 NB				:=			$(words $(SRC))

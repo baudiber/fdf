@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_fts.c                                          :+:      :+:    :+:   */
+/*   interaction.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/07 17:41:14 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/09 18:49:22 by baudiber         ###   ########.fr       */
+/*   Created: 2018/05/09 18:30:12 by baudiber          #+#    #+#             */
+/*   Updated: 2018/05/09 18:31:45 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "fdf.h"
 
-void	create_window(char *str, int width, int height, t_setup *setup)
+int		deal_key(int key, void *param)
 {
-	setup->width = width;
-	setup->height = height;
-	setup->win_ptr = mlx_new_window(setup->mlx_ptr, width, height, str);
-}
-
-void	env_points(t_setup *setup)
-{
-	setup->lastrow = setup->ynb * setup->linelen - setup->linelen; 	
-	setup->init.w = cos(20 / 2);
-	//setup->init.vect.x = 
-	//setup->init.vect.y = 
-	//setup->init.vect.z = 
+	(void)param;
+	/*
+	if (key == 13)
+		//w
+	if (key == 1)
+		//s
+	if (key == 0)
+		//a
+	if (key == 2)
+		//d
+	if (key == 126)
+		//up
+	if (key == 125)
+		//down
+	if (key == 123)
+		//left
+	if (key == 124)
+		//right
+	if (key == 4)
+		//display help
+	*/
+	if (key == 53)
+		exit (0);
+	return (0);
 }

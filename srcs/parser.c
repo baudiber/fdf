@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:54:27 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/07 18:08:17 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:42:59 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void			get_points(t_rows **rows, t_setup *setup)
 		i = 0;
 		while (i < len)
 		{
-			setup->points[ptcnt].color = point_color(tmp->tab[i]);
-			setup->points[ptcnt].x = i * 30;
-			setup->points[ptcnt].y = y * 30;
-			setup->points[ptcnt].z = ft_atoi(tmp->tab[i]);
+			setup->pts[ptcnt].color = point_color(tmp->tab[i]);
+			setup->pts[ptcnt].x = i * 30;
+			setup->pts[ptcnt].y = y * 30;
+			setup->pts[ptcnt].z = ft_atoi(tmp->tab[i]);
 			ptcnt++;
 			i++;
 		}
@@ -72,7 +72,7 @@ int				parse_lines(t_rows **rows, t_setup *setup)
 	tmp = *rows;
 	setup->linelen = ft_tablen(tmp->tab);		
 	setup->ptnb = setup->ynb * setup->linelen;
-	setup->points = (t_point *)malloc(sizeof(t_point) * setup->ptnb);
+	setup->pts = (t_point *)malloc(sizeof(t_point) * setup->ptnb);
 	while (tmp)
 	{
 		tmp = tmp->next;
