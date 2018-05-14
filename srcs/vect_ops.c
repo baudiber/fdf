@@ -37,6 +37,16 @@ t_vect	scale_vect(double scale, t_vect vect)
 	return (res);
 }
 
+t_vect	sub_vects(t_vect a, t_vect b)
+{
+	t_vect	res;
+
+	res.x = a.x - b.x;
+	res.y = a.y - b.y;
+	res.z = a.z - b.z;
+	return (res);
+}
+
 t_vect	add_vects(t_vect a, t_vect b, t_vect c)
 {
 	t_vect	res;

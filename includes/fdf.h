@@ -18,20 +18,18 @@
 # include <stdio.h>
 # include <math.h>
 
-typedef struct		s_point
-{
-	int				x;
-	int				y;
-	int				z;
-	unsigned int	color;
-}					t_point;
-
 typedef struct		s_vect
 {
 	double			x;
 	double			y;
 	double			z;
 }					t_vect;
+
+typedef struct		s_point
+{
+	struct s_vect	vect;
+	unsigned int	color;
+}					t_point;
 
 typedef struct		s_quat
 {
@@ -63,6 +61,7 @@ typedef struct		s_setup
 	int				ynb;
 	int				linelen;
 	int				lastrow;
+	double			matrix[4][4];
 	struct s_quat	init;
 }					t_setup;
 
@@ -76,5 +75,8 @@ void				display(t_setup *setup);
 int					deal_key(int key, void *param);
 void				display_splash(t_setup *setup);
 t_quat				quaternion_multiplicator(t_quat q0, t_quat q1);
+t_vect				normalize_vect(t_vect v);
+t_vect				sub_vects(t_vect a, t_vect b);
+t_vect				cross_product(t_vect v0, t_vect v1);
 
 #endif

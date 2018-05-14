@@ -38,9 +38,9 @@ void			get_points(t_rows **rows, t_setup *setup)
 		while (i < len)
 		{
 			setup->pts[ptcnt].color = point_color(tmp->tab[i]);
-			setup->pts[ptcnt].x = i * 30;
-			setup->pts[ptcnt].y = y * 30;
-			setup->pts[ptcnt].z = ft_atoi(tmp->tab[i]);
+			setup->pts[ptcnt].vect.x = i * 30;
+			setup->pts[ptcnt].vect.y = y * 30;
+			setup->pts[ptcnt].vect.z = ft_atoi(tmp->tab[i]);
 			ptcnt++;
 			i++;
 		}
@@ -79,6 +79,7 @@ int				parse_lines(t_rows **rows, t_setup *setup)
 		if (!tmp->tab)
 			break;
 		len2 = ft_tablen(tmp->tab);
+		printf("test\n");
 		if (setup->linelen != len2)
 			return (1);
 	}
@@ -103,6 +104,7 @@ void			parser(char *av, t_setup *setup)
 		ft_errors(1);
 	while ((ret = get_next_line(fd, &tmp->line)) > 0)
 	{
+		printf("gnl\n");
 		setup->ynb++;
 		if (check_line(tmp->line))
 			ft_errors(2);
