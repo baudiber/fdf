@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 23:18:22 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/09 18:49:09 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/15 19:16:02 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ t_vect	matrix_multiply(t_vect v, t_setup *stp)
 {
 	t_vect	res;
 
-	res.x = v.x * stp->matrix[0][0] + v.y * stp->matrix[1][0] + v.z * stp->matrix[2][0] + 1 * stp->matrix[3][0];
-	res.y = v.x * stp->matrix[0][1] + v.y * stp->matrix[1][1] + v.z * stp->matrix[2][1] + 1 * stp->matrix[3][1];
-	res.z = v.x * stp->matrix[0][2] + v.y * stp->matrix[1][2] + v.z * stp->matrix[2][2] + 1 * stp->matrix[3][2];
+	res.x = v.x * stp->matrix[0][0] + v.y * stp->matrix[1][0] + \
+			v.z * stp->matrix[2][0] + 1 * stp->matrix[3][0];
+	res.y = v.x * stp->matrix[0][1] + v.y * stp->matrix[1][1] + \
+			v.z * stp->matrix[2][1] + 1 * stp->matrix[3][1];
+	res.z = v.x * stp->matrix[0][2] + v.y * stp->matrix[1][2] + \
+			v.z * stp->matrix[2][2] + 1 * stp->matrix[3][2];
 	return (res);
 }
 
@@ -52,6 +55,7 @@ void	ft_lookat(t_setup *stp)
 	stp->matrix[3][1] = cam.y;
 	stp->matrix[3][2] = cam.z;
 }
+
 /*
 void	display(t_setup *stp)
 {
@@ -83,22 +87,24 @@ void	display(t_setup *stp)
 	mlx_key_hook(stp->win_ptr, deal_key, (void *)0);
 	mlx_loop(stp->mlx_ptr);
 }
-
 */
 
 void	display(t_setup *stp)
 {
 	int		i;
+	int		j;
 
 	create_window("FDF", 1024, 768, stp);
 	stp->img_ptr = mlx_new_image(stp->mlx_ptr, stp->width, stp->height);
 	stp->data = (int *)mlx_get_data_addr(stp->img_ptr, &stp->bpx, &stp->s_line, &stp->ed);
 	i = 0;
+	j = 1;
 	while (i < stp->ptnb - 1) 
 	{
-		ft_bresenham(stp->pts[i].vect.x, stp->pts[i].vect.y, stp->pts[i + 1].vect.x, stp->pts[i + 1].vect.y, stp);
+		j++;
+		ft_bresenham(stp->pts[i].vect.x + 200, stp->pts[i].vect.y + 200, stp->pts[i + 1].vect.x + 200, stp->pts[i + 1].vect.y + 200, stp);
 		if (i < stp->lastrow)
-			ft_bresenham(stp->pts[i].vect.x, stp->pts[i].vect.y, stp->pts[i + stp->ptnb / stp->ynb].vect.x, stp->pts[i + stp->ptnb / stp->ynb].vect.y, stp);
+			ft_bresenham(stp->pts[i].vect.x + 200, stp->pts[i].vect.y + 200, stp->pts[i + stp->ptnb / stp->ynb].vect.x + 200, stp->pts[i + stp->ptnb / stp->ynb].vect.y + 200, stp);
 		i++;
 	}
 	mlx_put_image_to_window(stp->data, stp->win_ptr, stp->img_ptr, 0, 0);
@@ -119,7 +125,6 @@ int		main(int ac, char **av)
 	{
 		stp.mlx_ptr = mlx_init();
 		parser(av[1], &stp); 
-		//printf("test\n");
 		env_points(&stp);
 		display_splash(&stp);
 		display(&stp);

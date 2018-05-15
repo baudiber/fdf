@@ -21,7 +21,7 @@ INCLUDES	=	-I $(INC_DIR)
 HEADER_H	=	$(INC_DIR)/$(NAME).h
 OBJ 		=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 MFLAGS		=	-lm -lmlx -framework OpenGL -framework Appkit
-LIBS 		=	-L $(LIB_DIR) -lft -g -L $(MLX_DIR) $(MFLAGS)
+LIBS 		=	-L $(LIB_DIR) -lft -L $(MLX_DIR) $(MFLAGS)
 
 all: $(NAME)
 
@@ -52,14 +52,22 @@ fclean: clean
 	@rm -f $(NAME)
 
 fast:
-	$(MAKE)	-j
+	@$(MAKE)	-j
+
+pyra:
+	@$(MAKE)
+	@./$(NAME) test_maps/pyra.fdf
 
 re: 
-	$(MAKE) fclean
-	$(MAKE)
+	@$(MAKE) fclean
+	@$(MAKE)
 
 test: 
-	$(MAKE)
-	./$(NAME) test_maps/42.fdf
+	@$(MAKE)
+	@./$(NAME) test_maps/42.fdf
+
+mini:
+	@$(MAKE)
+	@./$(NAME) test_maps/mini.fdf
 
 .PHONY: all clean fclean re build cbuild

@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 16:44:49 by baudiber          #+#    #+#             */
-/*   Updated: 2018/04/28 17:50:09 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/14 20:21:42 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char			**ft_tabnew(size_t size);
 void			ft_puttab(char **tab);
 int				*ft_tabintnew(size_t size);
 void			ft_putints(int *tab, size_t size);
-size_t			ft_tablen(char **tab);
+int				ft_tablen(char **tab);
 char			**ft_strsort(char **tab);
 int				*ft_intsort(int *tab, size_t size);
 size_t			ft_lstlen(t_list *lst);

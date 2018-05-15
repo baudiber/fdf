@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 17:42:03 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/09 17:31:44 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/14 17:43:33 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void	splash_art(t_setup *stp)
 	}
 }
 
+void	parse_ok(t_setup *stp)
+{
+	mlx_clear_window(stp->mlx_ptr, stp->win_ptr);
+}
+
 void	display_splash(t_setup *stp)
 {
 	create_window("BAUDIBER PRESENTS", 800, 600, stp);
@@ -50,6 +55,7 @@ void	display_splash(t_setup *stp)
 	mlx_put_image_to_window(stp->data, stp->win_ptr, stp->img_ptr, 0, 0);
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 330, 280, 0xFFFFFF, "Wireframe v0.1");
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 290, 400, 0xFFFFFF, "Press Mouse 1 to start");
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 290, 370, 0x00FF00, "Parsing was succesful");
 	mlx_key_hook(stp->win_ptr, deal_key, (void *)0);
 	mlx_mouse_hook(stp->win_ptr, mouse_hook, stp);
 	mlx_loop(stp->mlx_ptr);
