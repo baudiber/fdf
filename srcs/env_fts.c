@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 17:41:14 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/09 18:49:22 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/17 21:04:09 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	create_window(char *str, int width, int height, t_setup *setup)
 void	env_points(t_setup *setup)
 {
 	setup->lastrow = setup->ynb * setup->linelen - setup->linelen; 	
-	setup->init.w = cos(20 / 2);
-	//setup->init.vect.x = 
-	//setup->init.vect.y = 
-	//setup->init.vect.z = 
+	setup->q0.w = 30;
+	setup->q0.vect.x = 1;
+	setup->q0.vect.y = 0;
+	setup->q0.vect.z = 0;
 }

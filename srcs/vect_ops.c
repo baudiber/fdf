@@ -6,11 +6,24 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 00:12:41 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/09 17:09:11 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/17 21:06:59 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	get_matrix(t_quat q, t_setup *stp)
+{
+	stp->mat[0][0] = 1 - 2 * ((q.vect.y * q.vect.y) +(q.vect.z * q.vect.z));
+	stp->mat[0][1] = 2 * ((q.vect.x * q.vect.y) - (q.vect.z * q.w));
+	stp->mat[0][2] = 2 * ((q.vect.x * q.vect.z) + (q.vect.y * q.w));
+	stp->mat[1][0] = 2 * ((q.vect.x * q.vect.y) + (q.vect.z * q.w));
+	stp->mat[1][1] = 1 - 2 * ((q.vect.x * q.vect.x) + (q.vect.z * q.vect.z));
+	stp->mat[1][2] = 2 * ((q.vect.y * q.vect.z) - (q.vect.x * q.w));
+	stp->mat[2][0] = 2 * ((q.vect.x * q.vect.z) - (q.vect.y * q.w));
+	stp->mat[2][1] = 2 * ((q.vect.y * q.vect.z) + (q.vect.x * q.w));
+	stp->mat[2][2] = 1 - 2 * ((q.vect.x * q.vect.x) + (q.vect.y * q.vect.y));
+}
 
 double	dot_product(t_vect v0, t_vect v1)
 {
@@ -73,11 +86,23 @@ t_vect	normalize_vect(t_vect v)
 	return (v);
 }
 
+t_quat	conjugate(t_quat q)
+{
+	t_quat	res;
+
+	res.w = q.w;
+	res.vect.x = -q.vect.x;
+	res.vect.y = -q.vect.y;
+	res.vect.z = -q.vect.z;
+	return (res);
+}
+
 t_quat	quaternion_multiplicator(t_quat q0, t_quat q1)
 {
 	t_quat	res;
 
 	res.w = q0.w  * q1.w - dot_product(q0.vect, q1.vect);
 	res.vect = add_vects(scale_vect(q0.w, q1.vect), scale_vect(q1.w, q0.vect), cross_product(q0.vect, q1.vect));
+	//add normalize?
 	return (res);
 }

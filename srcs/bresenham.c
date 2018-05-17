@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 18:25:28 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/15 20:06:43 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/17 16:43:38 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	ft_bresenham(int x0, int y0, int x1, int y1, t_setup *setup)
 
 	if (x0 == x1)
 		ft_vertical_line(x0, y0, y1, setup);
-	if (x0 > x1)
-		ft_swap(x0, x1);
-	if (y0 > y1)
-		ft_swap(y0, y1);
+//	if (x0 > x1)
+//		ft_swap(&x0, &x1);
+//	if (y0 > y1)
+//		ft_swap(&y0, &y1);
 	while (x0 < x1)
 	{
 		setup->data[setup->width * y + x0] = 0xFFFFFF;

@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/09 17:29:07 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/17 21:06:16 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct		s_rows
 typedef struct		s_setup
 {
 	struct s_point	*pts;
+	struct s_point	*npts;
+	struct s_quat	q0;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
@@ -61,8 +63,7 @@ typedef struct		s_setup
 	int				ynb;
 	int				linelen;
 	int				lastrow;
-	double			matrix[4][4];
-	struct s_quat	init;
+	double			mat[3][3];
 }					t_setup;
 
 void				parser(char *av, t_setup *setup);
@@ -78,5 +79,6 @@ t_quat				quaternion_multiplicator(t_quat q0, t_quat q1);
 t_vect				normalize_vect(t_vect v);
 t_vect				sub_vects(t_vect a, t_vect b);
 t_vect				cross_product(t_vect v0, t_vect v1);
+void				get_matrix(t_quat q, t_setup *stp);
 
 #endif
