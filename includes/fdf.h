@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/17 21:06:16 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/20 18:08:00 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct		s_setup
 	struct s_point	*pts;
 	struct s_point	*npts;
 	struct s_quat	q0;
+	struct s_quat	q1;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
@@ -73,12 +74,14 @@ void				ft_wu(int x0, int y0, int x1, int y1);
 void				create_window(char *str, int width, int height, t_setup *setup);
 void				env_points(t_setup *setup);
 void				display(t_setup *setup);
-int					deal_key(int key, void *param);
+int					deal_key(int key, t_setup *stp);
 void				display_splash(t_setup *setup);
 t_quat				quaternion_multiplicator(t_quat q0, t_quat q1);
 t_vect				normalize_vect(t_vect v);
 t_vect				sub_vects(t_vect a, t_vect b);
 t_vect				cross_product(t_vect v0, t_vect v1);
 void				get_matrix(t_quat q, t_setup *stp);
+t_quat				conjugate(t_quat q);
+void				redraw(t_setup *stp);
 
 #endif

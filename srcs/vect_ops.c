@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 00:12:41 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/17 21:06:59 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/18 18:54:02 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ t_quat	quaternion_multiplicator(t_quat q0, t_quat q1)
 	res.w = q0.w  * q1.w - dot_product(q0.vect, q1.vect);
 	res.vect = add_vects(scale_vect(q0.w, q1.vect), scale_vect(q1.w, q0.vect), cross_product(q0.vect, q1.vect));
 	//add normalize?
+	res.vect = normalize_vect(res.vect);
 	return (res);
 }

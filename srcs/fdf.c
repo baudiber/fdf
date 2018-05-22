@@ -6,16 +6,19 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 23:18:22 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/17 21:05:44 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/20 20:01:45 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	matrix_multiplication(t_setup *stp)
+void	get_newpts(t_setup *stp)
 {
 	int		i;
 
+	stp->npts = (t_point *)malloc(sizeof(t_point) * stp->ptnb);
+	if (!stp->npts)
+		ft_errors(3);
 	i = 0;
 	while (i < stp->ptnb)
 	{
@@ -26,6 +29,28 @@ void	matrix_multiplication(t_setup *stp)
 	}
 }
 
+void	redraw(t_setup *stp)
+{
+	int		i;
+
+	get_newpts(stp);
+	mlx_clear_window(stp->mlx_ptr, stp->win_ptr);
+	mlx_destroy_image(stp->mlx_ptr, stp->img_ptr);
+	stp->img_ptr = mlx_new_image(stp->mlx_ptr, stp->width, stp->height);
+	stp->data = (int *)mlx_get_data_addr(stp->img_ptr, &stp->bpx, &stp->s_line, &stp->ed);
+	i = 0;
+	while (i < stp->ptnb - 1) 
+	{
+		ft_bresenham(stp->npts[i].vect.x + 200, stp->npts[i].vect.y + 200, stp->npts[i + 1].vect.x + 200, stp->npts[i + 1].vect.y + 200, stp);
+		if (i < stp->lastrow)
+			ft_bresenham(stp->npts[i].vect.x + 200, stp->npts[i].vect.y + 200, stp->npts[i + stp->ptnb / stp->ynb].vect.x + 200, stp->npts[i + stp->ptnb / stp->ynb].vect.y + 200, stp);
+		i++;
+	}
+	mlx_put_image_to_window(stp->data, stp->win_ptr, stp->img_ptr, 0, 0);
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 850, 740, 0xF0F0F0, "Press h for help");
+	mlx_loop(stp->mlx_ptr);
+}
+
 void	display(t_setup *stp)
 {
 	int		i;
@@ -34,21 +59,21 @@ void	display(t_setup *stp)
 	create_window("FDF", 1024, 768, stp);
 	stp->img_ptr = mlx_new_image(stp->mlx_ptr, stp->width, stp->height);
 	stp->data = (int *)mlx_get_data_addr(stp->img_ptr, &stp->bpx, &stp->s_line, &stp->ed);
+//	stp->q1 = quaternion_multiplicator(stp->q0, stp->q1);
+//	stp->q1 = quaternion_multiplicator(stp->q1, conjugate(stp->q1));
+	stp->q0.vect = normalize_vect(stp->q0.vect);
 	get_matrix(stp->q0, stp);
-	matrix_multiplication(stp);
+	get_newpts(stp);
 	i = 0;
 	j = 1;
-	while (i < stp->ptnb - 1) 
+	while (i < stp->ptnb) 
 	{
-		j++;
-		ft_bresenham(stp->npts[i].vect.x + 200, stp->npts[i].vect.y + 200, stp->npts[i + 1].vect.x + 200, stp->npts[i + 1].vect.y + 200, stp);
-		if (i < stp->lastrow)
-			ft_bresenham(stp->npts[i].vect.x + 200, stp->npts[i].vect.y + 200, stp->npts[i + stp->ptnb / stp->ynb].vect.x + 200, stp->npts[i + stp->ptnb / stp->ynb].vect.y + 200, stp);
+		stp->data[(int)(stp->width * (stp->npts[i].vect.y + 100) + stp->npts[i].vect.x + 100)] = 0xFFFFFF;
 		i++;
 	}
 	mlx_put_image_to_window(stp->data, stp->win_ptr, stp->img_ptr, 0, 0);
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 850, 740, 0xF0F0F0, "Press h for help");
-	mlx_key_hook(stp->win_ptr, deal_key, (void *)0);
+	mlx_key_hook(stp->win_ptr, deal_key, stp);
 	mlx_loop(stp->mlx_ptr);
 }
 
