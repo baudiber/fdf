@@ -6,14 +6,15 @@ OBJ_DIR		=	./obj
 LIB_DIR		=	./libft
 MLX_DIR		=	./minilibx/minilibx_mac
 
-SRC			=	fdf.c	\
+SRC			=	main.c \
+				setup.c \
+				fdf.c	\
 				parser.c \
 				errors.c \
 				bresenham.c \
 				splash.c \
-				env_fts.c \
 				vect_ops.c \
-				interaction.c
+				keys.c
 
 CC 			=	gcc
 FLAGS		=	-Wall -Werror -Wextra

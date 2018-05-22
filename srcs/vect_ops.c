@@ -6,12 +6,13 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 00:12:41 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/18 18:54:02 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/23 01:11:28 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/*
 void	get_matrix(t_quat q, t_setup *stp)
 {
 	stp->mat[0][0] = 1 - 2 * ((q.vect.y * q.vect.y) +(q.vect.z * q.vect.z));
@@ -107,3 +108,4 @@ t_quat	quaternion_multiplicator(t_quat q0, t_quat q1)
 	res.vect = normalize_vect(res.vect);
 	return (res);
 }
+*/

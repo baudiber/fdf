@@ -6,12 +6,12 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 23:18:22 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/20 20:01:45 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/23 00:59:02 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
+/*
 void	get_newpts(t_setup *stp)
 {
 	int		i;
@@ -59,8 +59,6 @@ void	display(t_setup *stp)
 	create_window("FDF", 1024, 768, stp);
 	stp->img_ptr = mlx_new_image(stp->mlx_ptr, stp->width, stp->height);
 	stp->data = (int *)mlx_get_data_addr(stp->img_ptr, &stp->bpx, &stp->s_line, &stp->ed);
-//	stp->q1 = quaternion_multiplicator(stp->q0, stp->q1);
-//	stp->q1 = quaternion_multiplicator(stp->q1, conjugate(stp->q1));
 	stp->q0.vect = normalize_vect(stp->q0.vect);
 	get_matrix(stp->q0, stp);
 	get_newpts(stp);
@@ -76,22 +74,4 @@ void	display(t_setup *stp)
 	mlx_key_hook(stp->win_ptr, deal_key, stp);
 	mlx_loop(stp->mlx_ptr);
 }
-
-int		main(int ac, char **av)
-{
-	t_setup	stp;
-
-	if (ac != 2)
-		ft_putendl("usage : ./fdf <map>");
-	else if (!ft_strstr(av[1], ".fdf"))
-		ft_putendl("wrong file format");
-	else
-	{
-		stp.mlx_ptr = mlx_init();
-		parser(av[1], &stp); 
-		env_points(&stp);
-		display_splash(&stp);
-		display(&stp);
-	}
-	return (0);
-}
+*/

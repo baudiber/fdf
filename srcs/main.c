@@ -1,51 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interaction.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/09 18:30:12 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/20 19:40:15 by baudiber         ###   ########.fr       */
+/*   Created: 2018/05/22 23:19:25 by baudiber          #+#    #+#             */
+/*   Updated: 2018/05/23 01:39:25 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "fdf.h"
 
-int		deal_key(int key, t_setup *stp)
+int		main(int ac, char **av)
 {
-	if (key == 126)
+	t_setup	stp;
+	t_map	map;
+
+	if (ac != 2)
+		ft_putendl("usage : ./fdf <map>");
+	else if (!ft_strstr(av[1], ".fdf"))
+		ft_putendl("wrong file format");
+	else
 	{
-		redraw(stp);
-		printf("^\n");
+		ft_bzero(&stp, sizeof(t_setup));
+		stp.av = av[1];
+		parser(&stp, &map); 
+		printf("ptnb: %d\n", stp.ptnb);
+		init_all(&stp);
+		display_splash(&stp);
+		//display(&stp);
 	}
-	if (key == 125)
-	{
-		redraw(stp);
-		printf("v\n");
-	}
-	if (key == 123)
-	{
-		printf("<\n");
-	}
-	if (key == 124)
-	{
-		printf(">\n");
-	}
-	/*
-	if (key == 13)
-		//w
-	if (key == 1)
-		//s
-	if (key == 0)
-		//a
-	if (key == 2)
-		//d
-	if (key == 4)
-		//display help
-	*/
-	if (key == 53)
-		exit (0);
 	return (0);
 }
