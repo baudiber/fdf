@@ -14,6 +14,8 @@ SRC			=	main.c \
 				bresenham.c \
 				splash.c \
 				vect_ops.c \
+				draw.c \
+				ops.c \
 				keys.c
 
 CC 			=	gcc

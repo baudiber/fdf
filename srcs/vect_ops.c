@@ -12,6 +12,112 @@
 
 #include "fdf.h"
 
+t_hpt		hpt(float x, float y, float z, float w)
+{
+	t_hpt	pt;
+
+	pt.x = x;
+	pt.y = y;
+	pt.z = z;
+	pt.w = w;
+	return (pt);
+}
+
+t_mat4x4	id_mat(void)
+{
+	t_mat4x4	mat;
+
+	ft_bzero(&mat, sizeof(t_mat4x4));
+	mat.m[0][0] = 1.0;
+	mat.m[1][1] = 1.0;
+	mat.m[2][2] = 1.0;
+	mat.m[3][3] = 1.0;
+	return (mat);
+}
+
+t_mat4x4	scale_mat(t_hpt scale)
+{
+	t_mat4x4	mat;
+	
+	mat = id_mat();
+	mat.m[0][0] = scale.x;	
+	mat.m[1][1] = scale.y;	
+	mat.m[2][2] = scale.z;	
+	mat.m[3][3] = 1.0;
+	return (mat);
+}
+
+t_mat4x4	mult_4x4mat(t_mat4x4 m1, t_mat4x4 m2)
+{
+	int			i;
+	int			j;
+	t_mat4x4	res;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			res.m[i][j] = m1.m[i][0] * m2.m[0][j] + \
+						  m1.m[i][1] * m2.m[1][j] + \
+						  m1.m[i][2] * m2.m[2][j] + \
+						  m1.m[i][3] * m2.m[3][j];
+			j++;
+		}
+		i++;
+	}
+	return (res);
+}
+
+t_hpt	sub_vects(t_hpt a, t_hpt b)
+{
+	t_hpt	res;
+
+	res.x = a.x - b.x;
+	res.y = a.y - b.y;
+	res.z = a.z - b.z;
+	res.w = a.w - b.w;
+	return (res);
+}
+
+t_hpt	cross_product(t_hpt v0, t_hpt v1)
+{
+	t_hpt	res;
+
+	res.x = v0.y * v1.z - v0.z * v1.y;
+	res.y = v0.z * v1.x - v0.x * v1.z;
+	res.z = v0.x * v1.y - v0.y * v1.x;
+	return (res);
+}
+
+t_hpt	conjugate(t_hpt v)
+{
+	t_hpt	res;
+
+	res.w = v.w;
+	res.x = -v.x;
+	res.y = -v.y;
+	res.z = -v.z;
+	return (res);
+}
+
+t_hpt	normalize_vect(t_hpt v)
+{
+	t_hpt	res;
+	float	len;
+
+	len = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);	
+	if (len > 0)
+	{
+		res.x = v.x / len;
+		res.y = v.y / len;
+		res.z = v.z / len;
+		return (res);
+	}
+	return (v);
+}
+
 /*
 void	get_matrix(t_quat q, t_setup *stp)
 {
@@ -31,35 +137,6 @@ double	dot_product(t_vect v0, t_vect v1)
 	return (v0.x * v1.x + v0.y * v1.y + v0.z * v1.z);
 }
 
-t_vect	cross_product(t_vect v0, t_vect v1)
-{
-	t_vect	res;
-
-	res.x = v0.y * v1.z - v0.z * v1.y;
-	res.y = v0.z * v1.x - v0.x * v1.z;
-	res.z = v0.x * v1.y - v0.y * v1.x;
-	return (res);
-}
-
-t_vect	scale_vect(double scale, t_vect vect)
-{
-	t_vect	res;
-
-	res.x = vect.x * scale;
-	res.y = vect.y * scale;
-	res.z = vect.z * scale;
-	return (res);
-}
-
-t_vect	sub_vects(t_vect a, t_vect b)
-{
-	t_vect	res;
-
-	res.x = a.x - b.x;
-	res.y = a.y - b.y;
-	res.z = a.z - b.z;
-	return (res);
-}
 
 t_vect	add_vects(t_vect a, t_vect b, t_vect c)
 {
@@ -71,32 +148,7 @@ t_vect	add_vects(t_vect a, t_vect b, t_vect c)
 	return (res);
 }
 
-t_vect	normalize_vect(t_vect v)
-{
-	t_vect	res;
-	double	len;
 
-	len = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);	
-	if (len > 0)
-	{
-		res.x = v.x / len;
-		res.y = v.y / len;
-		res.z = v.z / len;
-		return (res);
-	}
-	return (v);
-}
-
-t_quat	conjugate(t_quat q)
-{
-	t_quat	res;
-
-	res.w = q.w;
-	res.vect.x = -q.vect.x;
-	res.vect.y = -q.vect.y;
-	res.vect.z = -q.vect.z;
-	return (res);
-}
 
 t_quat	quaternion_multiplicator(t_quat q0, t_quat q1)
 {

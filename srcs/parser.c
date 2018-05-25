@@ -20,7 +20,7 @@ unsigned int	point_color(char *str)
 	return ((color) ? color : 0xFFFFFF);
 }
 
-static void		get_points(t_rows **rows, t_map *map, int len)
+static void		get_points(t_rows **rows, t_setup *stp)
 {
 	t_rows	*tmp;
 	int		i;
@@ -33,13 +33,13 @@ static void		get_points(t_rows **rows, t_map *map, int len)
 	while (tmp->tab)
 	{
 		i = 0;
-		while (i < len)
+		while (i < stp->linelen)
 		{
-			map->pts[ptcnt].color = point_color(tmp->tab[i]);
-			map->pts[ptcnt].x = i;
-			map->pts[ptcnt].y = y;
-			map->pts[ptcnt].z = ft_atoi(tmp->tab[i]);
-			map->pts[ptcnt].w = 1.0;
+			stp->map.pts[ptcnt].color = point_color(tmp->tab[i]);
+			stp->map.pts[ptcnt].x = i;
+			stp->map.pts[ptcnt].y = y;
+			stp->map.pts[ptcnt].z = ft_atoi(tmp->tab[i]);
+			stp->map.pts[ptcnt].w = 1.0;
 			ptcnt++;
 			i++;
 		}
@@ -64,31 +64,31 @@ static int		check_line(char *str)
 	return (0);
 }
 
-static int		parse_lines(t_rows **rows, t_setup *setup, t_map *map)
+static int		parse_lines(t_rows **rows, t_setup *stp)
 {
 	int		len2;
 	t_rows	*tmp;
 
 	tmp = *rows;
-	setup->linelen = ft_tablen(tmp->tab);		
+	stp->linelen = ft_tablen(tmp->tab);		
 	while (tmp->tab)
 	{
-		setup->ynb++;
+		stp->ynb++;
 		tmp = tmp->next;
 		if (!tmp->tab)
 			break;
 		len2 = ft_tablen(tmp->tab);
-		if (setup->linelen != len2)
+		if (stp->linelen != len2)
 			return (1);
 	}
-	setup->ptnb = setup->ynb * setup->linelen;
-	if (!(map->pts = (t_hpt *)malloc(sizeof(t_hpt) * setup->ptnb)))
+	stp->ptnb = stp->ynb * stp->linelen;
+	if (!(stp->map.pts = (t_hpt *)malloc(sizeof(t_hpt) * stp->ptnb)))
 		ft_errors(3);	
-	get_points(rows, map, setup->linelen);
+	get_points(rows, stp);
 	return (0);
 }
 
-void			parser(t_setup *stp, t_map *map)
+void			parser(t_setup *stp)
 {
 	int		fd;
 	int		ret;
@@ -113,6 +113,6 @@ void			parser(t_setup *stp, t_map *map)
 		tmp = tmp->next;
 	}
 	tmp->tab = NULL;
-	if (ret == -1 || parse_lines(&rows, stp, map))
+	if (ret == -1 || parse_lines(&rows, stp))
 		ft_errors(2);
 }

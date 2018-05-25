@@ -41,6 +41,4 @@ void	display_splash(t_setup *stp)
 			390, 0x00FF00, "Parsing was succesful");
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, WIDTH / 2 - 85, \
 			420, 0xFFFFFF, "Press Space to start");
-	mlx_key_hook(stp->win_ptr, deal_key, stp);
-	mlx_loop(stp->mlx_ptr);
 }

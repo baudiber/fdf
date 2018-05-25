@@ -15,7 +15,6 @@
 int		main(int ac, char **av)
 {
 	t_setup	stp;
-	t_map	map;
 
 	if (ac != 2)
 		ft_putendl("usage : ./fdf <map>");
@@ -25,10 +24,10 @@ int		main(int ac, char **av)
 	{
 		ft_bzero(&stp, sizeof(t_setup));
 		stp.av = av[1];
-		parser(&stp, &map); 
+		parser(&stp); 
 		printf("ptnb: %d\n", stp.ptnb);
 		init_all(&stp);
-		display_splash(&stp);
+		fdf(&stp);
 		//display(&stp);
 	}
 	return (0);

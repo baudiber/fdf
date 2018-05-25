@@ -34,9 +34,12 @@ int		deal_key(int key, t_setup *stp)
 	if (key == 49)
 	{
 		printf("space\n");
-		//space
+		if (stp->splash == 0)
+		{
+			stp->splash = 1;
+			redraw(stp);
+		}
 	}
-	stp->splash = 0;
 	//printf("%d\n", key);
 	/*
 	if (key == 13)
