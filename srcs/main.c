@@ -26,6 +26,7 @@ int		main(int ac, char **av)
 		stp.av = av[1];
 		parser(&stp); 
 		printf("ptnb: %d\n", stp.ptnb);
+		printf("highest: %d\n", stp.map.highest);
 		init_all(&stp);
 		fdf(&stp);
 		//display(&stp);

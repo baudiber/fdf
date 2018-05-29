@@ -14,7 +14,7 @@
 # define _FDF_H_
 # define WIDTH 	1024
 # define HEIGHT 724
-# define GAP	30
+# define ABS(x) ((x > 0) ? x : -x)
 
 # include "mlx.h"
 # include "libft.h"
@@ -67,13 +67,16 @@ struct				s_scene
 	t_hpt			scale;
 	t_hpt			rot;
 	int				dot;
+	int				pers;
 	t_mat4x4		mat;
 };
 
 struct				s_map
 {
 	t_mat4x4		mat;
+	int				highest;
 	t_hpt			*pts;
+	t_hpt			*tpts;
 	t_hpt			*npts;
 	t_hpt			scale;
 	t_hpt			rot;
@@ -123,5 +126,10 @@ t_mat4x4			rot_mat_x(float x);
 t_mat4x4			rot_mat_y(float y);
 t_mat4x4			rot_mat_z(float z);
 t_mat4x4			rot_mat_pos(t_hpt vec);
+t_hpt				mult_4x4mat_hpt(t_mat4x4 mat, t_hpt p);
+void				display_dots(t_setup *stp);
+void				display_lines(t_setup *stp);
+t_hpt				apply_pers_hpt(t_hpt p, t_scene *s);
+void				check_and_draw(t_setup *stp, t_hpt pt);
 
 #endif

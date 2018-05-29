@@ -40,7 +40,9 @@ void	ft_bresenham(int x0, int y0, int x1, int y1, t_setup *setup)
 	delta = 2 * deltay - deltax;
 	while (x0 < x1)
 	{
-		setup->data[WIDTH * y + x0] = 0xFFFFFF;
+
+		check_and_draw(setup, hpt(x0 + WIDTH / 2, y + HEIGHT / 2, 0, 0));
+		//setup->data[WIDTH * y + x0] = 0xFFFFFF;
 		if (delta > 0)
 		{
 			y++;

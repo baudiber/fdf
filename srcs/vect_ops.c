@@ -12,6 +12,17 @@
 
 #include "fdf.h"
 
+t_hpt	mult_4x4mat_hpt(t_mat4x4 mat, t_hpt p)
+{
+	t_hpt	res;
+
+	res.x = mat.m[0][0] * p.x + mat.m[0][1] * p.y + mat.m[0][2] * p.z + mat.m[0][3] * p.w;
+	res.y = mat.m[1][0] * p.x + mat.m[1][1] * p.y + mat.m[1][2] * p.z + mat.m[1][3] * p.w;
+	res.z = mat.m[2][0] * p.x + mat.m[2][1] * p.y + mat.m[2][2] * p.z + mat.m[2][3] * p.w;
+	res.w = mat.m[3][0] * p.x + mat.m[3][1] * p.y + mat.m[3][2] * p.z + mat.m[3][3] * p.w;
+	return (res);
+}
+
 t_hpt		hpt(float x, float y, float z, float w)
 {
 	t_hpt	pt;
@@ -80,7 +91,7 @@ t_hpt	sub_vects(t_hpt a, t_hpt b)
 	res.w = a.w - b.w;
 	return (res);
 }
-
+/*
 t_hpt	cross_product(t_hpt v0, t_hpt v1)
 {
 	t_hpt	res;
@@ -88,6 +99,17 @@ t_hpt	cross_product(t_hpt v0, t_hpt v1)
 	res.x = v0.y * v1.z - v0.z * v1.y;
 	res.y = v0.z * v1.x - v0.x * v1.z;
 	res.z = v0.x * v1.y - v0.y * v1.x;
+	return (res);
+}
+*/
+
+t_hpt	cross_product(t_hpt a, t_hpt b)
+{
+	t_hpt	res;
+
+	res.x = a.y * b.w - b.y * a.z;
+	res.y = a.z * b.x - b.z * a.x;
+	res.z = a.x * b.y - b.x * a.y;
 	return (res);
 }
 

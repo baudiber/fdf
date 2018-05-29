@@ -16,6 +16,8 @@ SRC			=	main.c \
 				vect_ops.c \
 				draw.c \
 				ops.c \
+				display.c \
+				pers.c \
 				keys.c
 
 CC 			=	gcc

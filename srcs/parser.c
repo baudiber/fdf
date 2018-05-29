@@ -39,6 +39,7 @@ static void		get_points(t_rows **rows, t_setup *stp)
 			stp->map.pts[ptcnt].x = i;
 			stp->map.pts[ptcnt].y = y;
 			stp->map.pts[ptcnt].z = ft_atoi(tmp->tab[i]);
+			stp->map.highest = (ABS(stp->map.pts[ptcnt].z) > stp->map.highest) ? ABS(stp->map.pts[ptcnt].z) : stp->map.highest;
 			stp->map.pts[ptcnt].w = 1.0;
 			ptcnt++;
 			i++;
