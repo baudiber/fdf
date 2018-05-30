@@ -84,7 +84,7 @@ void	draw(t_setup *stp)
 	get_new_pts(&stp->map, stp->ptnb); 
 //	if (stp->scene.dot == 0)
 //	else if (stp->scene.dot == 1)
-	display_lines(stp);
+	//display_lines(stp);
 	display_dots(stp);
 }
 
