@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/05/31 16:29:49 by baudiber          #+#    #+#             */
+/*   Updated: 2018/05/31 16:33:40 by baudiber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	reset_img(t_setup *stp)
@@ -82,22 +94,23 @@ void	draw(t_setup *stp)
 	get_cam_mat(&stp->scene);
 	get_map_mat(&stp->scene, &stp->map);
 	get_new_pts(&stp->map, stp->ptnb); 
-//	if (stp->scene.dot == 0)
-//	else if (stp->scene.dot == 1)
-	//display_lines(stp);
-	display_dots(stp);
+	if (stp->scene.dot == 0)
+		display_lines(stp);
+	else if (stp->scene.dot == 1)
+		display_dots(stp);
 }
 
 void	redraw(t_setup *stp)
 {
-	int		i;
-
-	i = 0;
-	while (i < stp->ptnb)
-	{
-		printf("pt %d x:%f y:%f z:%f w:%f\n", i, stp->map.tpts[i].x, stp->map.tpts[i].y, stp->map.tpts[i].z, stp->map.tpts[i].w);
-		i++;
-	}
+//	int		i;
+//
+//	i = 0;
+//	while (i < stp->ptnb)
+//	{
+//		printf("pt %d x:%f y:%f z:%f w:%f\n", i, stp->map.tpts[i].x,\
+//		stp->map.tpts[i].y, stp->map.tpts[i].z, stp->map.tpts[i].w);
+//		i++;
+//	}
 	reset_img(stp);
 	draw(stp);
 	mlx_put_image_to_window(stp->data, stp->win_ptr, stp->img_ptr, 0, 0);

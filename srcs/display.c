@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/05/31 16:29:44 by baudiber          #+#    #+#             */
+/*   Updated: 2018/05/31 17:37:51 by baudiber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	check_and_draw(t_setup *stp, t_hpt pt)
@@ -31,14 +43,19 @@ void	display_dots(t_setup *stp)
 
 void	display_lines(t_setup *stp)
 {
-	int		i;
+	int		x;
+	int		y;
 
-	i = 0;
-	//while (i < stp->linelen * stp->ynb)
-	while (i < stp->lastrow)
+	y = 0;
+	while (y < stp->ynb)
 	{
-		ft_bresenham(stp->map.npts[i].x, stp->map.npts[i].y, stp->map.npts[i + stp->linelen].x, stp->map.npts[i + stp->linelen].y, stp);
-		i += stp->linelen;
-		//printf("test %d\n", i);
+		x = y * stp->linelen;
+		while (x < (y + 1) * stp->linelen - 1)
+		{
+			ft_bresenham(stp->map.npts[x].x, stp->map.npts[x].y, stp->map.npts[x + 1].x, stp->map.npts[x + 1].y, stp);
+			//ft_bresenham(stp->map.npts[x].x, stp->map.npts[x].y, stp->map.npts[x + stp->linelen].x, stp->map.npts[x + stp->linelen].y, stp);
+			x++;
+		}
+		y++;
 	}
 }

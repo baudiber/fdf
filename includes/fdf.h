@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/23 01:40:31 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/05/31 17:33:54 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,6 @@ void				display_dots(t_setup *stp);
 void				display_lines(t_setup *stp);
 t_hpt				apply_pers_hpt(t_hpt p, t_scene *s);
 void				check_and_draw(t_setup *stp, t_hpt pt);
+void				ft_newbresenham(int x0, int y0, int x1, int y1, t_setup *setup);
 
 #endif
