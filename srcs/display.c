@@ -46,14 +46,28 @@ void	display_lines(t_setup *stp)
 	int		x;
 	int		y;
 
+	int		i;
+
+	i = 0;
+	while (i < stp->ptnb)
+	{
+		if (stp->scene.pers == 1)
+			stp->map.npts[i] = apply_pers_hpt(stp->map.npts[i], &stp->scene);
+		stp->map.npts[i].z = (stp->map.npts[i].z - stp->scene.cam.near) / stp->scene.cam.far;
+		i++;
+	}
 	y = 0;
 	while (y < stp->ynb)
 	{
 		x = y * stp->linelen;
-		while (x < (y + 1) * stp->linelen - 1)
+		while (x < (y + 1) * stp->linelen)
 		{
-			ft_bresenham(stp->map.npts[x].x, stp->map.npts[x].y, stp->map.npts[x + 1].x, stp->map.npts[x + 1].y, stp);
-			//ft_bresenham(stp->map.npts[x].x, stp->map.npts[x].y, stp->map.npts[x + stp->linelen].x, stp->map.npts[x + stp->linelen].y, stp);
+			if (x < ( y + 1) * stp->linelen - 1)
+				ft_bresenham(stp->map.npts[x].x, stp->map.npts[x].y, stp->map.npts[x + 1].x, stp->map.npts[x + 1].y, stp);
+			if (x < stp->lastrow)
+			{
+				ft_bresenham(stp->map.npts[x].x, stp->map.npts[x].y, stp->map.npts[x + stp->linelen].x, stp->map.npts[x + stp->linelen].y, stp);
+			}
 			x++;
 		}
 		y++;

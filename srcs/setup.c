@@ -23,7 +23,7 @@ void	cam_scene_settings(t_setup *stp)
 	stp->scene.scale = hpt(1, 1, 1, 1); 
 	stp->scene.rot = hpt(0, 0, 0, 1); 
 	stp->scene.pos = hpt(0, 0, 0, 1); 
-	stp->scene.cam.fov = 100;
+	stp->scene.cam.fov = 70;
 	stp->scene.cam.from = hpt(0, 1000, 1000, 1);
 	stp->scene.cam.to = hpt(0, 0, 0, 1);
 	stp->scene.cam.near = 500; 
@@ -60,6 +60,7 @@ void	transform_points(t_map *map, int ptnb, int ynb, int linelen)
 void	init_all(t_setup *stp)
 {
 	stp->mlx_ptr = mlx_init();
+	mlx_do_key_autorepeaton(stp->mlx_ptr);
 	create_window(stp->av, stp);
 	stp->img_ptr = mlx_new_image(stp->mlx_ptr, WIDTH, HEIGHT);
 	stp->data = (int *)mlx_get_data_addr(stp->img_ptr, &stp->bpx, &stp->s_line, &stp->ed);

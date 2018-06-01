@@ -51,33 +51,33 @@ int		deal_key(int key, t_setup *stp)
 	if (key == 13)
 	{
 		printf("W\n");
-		//stp->map.pos.y += 100;
-		stp->scene.cam.from.y += 100;
-		stp->scene.cam.to.y += 100;
+		stp->map.pos.y += 100;
+//		stp->scene.cam.from.y += 100;
+//		stp->scene.cam.to.y += 100;
 		redraw(stp);
 	}
 	if (key == 1)
 	{
 		printf("S\n");
-		//stp->map.pos.y -= 100;
-		stp->scene.cam.from.y -= 100;
-		stp->scene.cam.to.y -= 100;
+		stp->map.pos.y -= 100;
+//		stp->scene.cam.from.y -= 100;
+//		stp->scene.cam.to.y -= 100;
 		redraw(stp);
 	}
 	if (key == 2)
 	{
 		printf("D\n");
-		//stp->map.pos.x += 100;
-		stp->scene.cam.to.x += 100;
-		stp->scene.cam.from.x += 100;
+		stp->map.pos.x += 100;
+//		stp->scene.cam.to.x += 100;
+//		stp->scene.cam.from.x += 100;
 		redraw(stp);
 	}
 	if (key == 0)
 	{
 		printf("A\n");
-		//stp->map.pos.x -= 100;
-		stp->scene.cam.from.x -= 100;
-		stp->scene.cam.to.x -= 100;
+		stp->map.pos.x -= 100;
+//		stp->scene.cam.from.x -= 100;
+//		stp->scene.cam.to.x -= 100;
 		redraw(stp);
 	}
 	if (key == 15)
