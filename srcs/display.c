@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:29:44 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/31 17:37:51 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/05 21:30:57 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@ void	check_and_draw(int **img, t_hpt pt, unsigned int color)
 	(*img)[(int)pt.y * WIDTH + (int)pt.x] = color;
 }
 
-/*
-void	check_and_draw(t_setup *stp, t_hpt pt)
-{
-	if ((int)pt.x <= 0 || (int)pt.x > WIDTH - 2 || (int)pt.y <= 0 || (int)pt.y > HEIGHT - 2)
-		return ;
-	stp->data[(int)pt.y * WIDTH + (int)pt.x] = 0xFFFFFF;
-}
-*/
 void	draw_dot(int **img, t_hpt pt)
 {
 	pt.x += WIDTH / 2;
@@ -85,7 +77,7 @@ void	display_lines(t_setup *stp)
 
 void	display_help(t_setup *stp)
 {
-	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 5, 0xFF0000, "w, a, s, d = Movement");
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 5, 0xFF0000, "w, a, s, d = Move camera");
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 25, 0xFF0000, "up / down arrows = Zoom");
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 45, 0xFF0000, "i, j, k, l = Rotation");
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 65, 0xFF0000, "r = Switch Dots/Lines");

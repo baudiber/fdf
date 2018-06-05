@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/31 17:33:54 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/05 23:34:39 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void				ft_errors(int type);
 void				init_all(t_setup *stp);
 void				fdf(t_setup *stp);
 void				create_window(char *str, t_setup *setup);
-int					deal_key(int key, t_setup *stp);
+int					stp_key(int key, t_setup *stp);
 void				display_splash(t_setup *setup);
 t_hpt				normalize_vect(t_hpt v);
 t_hpt				sub_vects(t_hpt a, t_hpt b);
@@ -133,5 +133,7 @@ t_hpt				apply_pers_hpt(t_hpt p, t_scene *s);
 void				check_and_draw(int **img, t_hpt pt, unsigned int color);
 void				ft_bresenham(t_hpt p1, t_hpt p2, int **img);
 void				display_help(t_setup *stp);
+int					keys(int key, t_setup *stp);
+void				cam_scene_settings(t_setup *stp);
 
 #endif
