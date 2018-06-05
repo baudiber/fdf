@@ -84,6 +84,7 @@ void	get_new_pts(t_map *map, int len)
 	while (i < len)
 	{
 		map->npts[i] = mult_4x4mat_hpt(map->mat, map->tpts[i]);
+		map->npts[i].color = map->tpts[i].color;
 		i++;
 	}
 }
@@ -114,5 +115,8 @@ void	redraw(t_setup *stp)
 	reset_img(stp);
 	draw(stp);
 	mlx_put_image_to_window(stp->data, stp->win_ptr, stp->img_ptr, 0, 0);
-	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 850, 740, 0xF0F0F0, "Press h for help");
+	if (stp->help)
+		display_help(stp);
+	else
+		mlx_string_put(stp->mlx_ptr, stp->win_ptr, 850, 695, 0xFFFFFF, "Press h for help");
 }

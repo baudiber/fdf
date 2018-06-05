@@ -65,6 +65,7 @@ void	init_all(t_setup *stp)
 	stp->img_ptr = mlx_new_image(stp->mlx_ptr, WIDTH, HEIGHT);
 	stp->data = (int *)mlx_get_data_addr(stp->img_ptr, &stp->bpx, &stp->s_line, &stp->ed);
 	stp->splash = 0;
+	stp->help = 0;
 	stp->lastrow = stp->ynb * stp->linelen - stp->linelen; 	
 	stp->map.pos = hpt(0, 0, 0, 1); 
 	stp->map.scale = hpt(800, 800, 800, 1);

@@ -51,33 +51,33 @@ int		deal_key(int key, t_setup *stp)
 	if (key == 13)
 	{
 		printf("W\n");
-		stp->map.pos.y += 100;
-//		stp->scene.cam.from.y += 100;
-//		stp->scene.cam.to.y += 100;
+//		stp->map.pos.y += 100;
+		stp->scene.cam.from.y -= 100;
+		stp->scene.cam.to.y -= 100;
 		redraw(stp);
 	}
 	if (key == 1)
 	{
 		printf("S\n");
-		stp->map.pos.y -= 100;
-//		stp->scene.cam.from.y -= 100;
-//		stp->scene.cam.to.y -= 100;
+//		stp->map.pos.y -= 100;
+		stp->scene.cam.from.y += 100;
+		stp->scene.cam.to.y += 100;
 		redraw(stp);
 	}
 	if (key == 2)
 	{
 		printf("D\n");
-		stp->map.pos.x += 100;
-//		stp->scene.cam.to.x += 100;
-//		stp->scene.cam.from.x += 100;
+//		stp->map.pos.x += 100;
+		stp->scene.cam.to.x += 100;
+		stp->scene.cam.from.x += 100;
 		redraw(stp);
 	}
 	if (key == 0)
 	{
 		printf("A\n");
-		stp->map.pos.x -= 100;
-//		stp->scene.cam.from.x -= 100;
-//		stp->scene.cam.to.x -= 100;
+		//stp->map.pos.x -= 100;
+		stp->scene.cam.from.x -= 100;
+		stp->scene.cam.to.x -= 100;
 		redraw(stp);
 	}
 	if (key == 15)
@@ -98,14 +98,63 @@ int		deal_key(int key, t_setup *stp)
 			stp->scene.pers = 0;
 		redraw(stp);
 	}
-	/*
+	if (key == 34)
+	{
+		printf("I\n");
+		if (stp->scene.pers == 1)
+		{
+			stp->scene.rot.x += 100;
+			redraw(stp);
+		}
+	}
+	if (key == 40)
+	{
+		printf("K\n");
+		if (stp->scene.pers == 1)
+		{
+			stp->scene.rot.x -= 100;
+			redraw(stp);
+		}
+	}
+	if (key == 38)
+	{
+		printf("J\n");
+		if (stp->scene.pers == 1)
+		{
+			stp->scene.rot.y -= 100;
+			redraw(stp);
+		}
+	}
+	if (key == 37)
+	{
+		printf("L\n");
+		if (stp->scene.pers == 1)
+		{
+			stp->scene.rot.y += 100;
+			redraw(stp);
+		}
+	}
+	if (key == 11)
+	{
+		printf("B\n");
+		stp->scene.rot = hpt(0, 0, 0, 1); 
+		stp->scene.cam.from = hpt(0, 1000, 1000, 1);
+		stp->scene.cam.to = hpt(0, 0, 0, 1);
+		stp->scene.dot = 0;
+		stp->scene.pers = 0;
+		redraw(stp);
+	}
 	if (key == 4)
 	{
-		//display help
+		printf("H\n");
+		if (stp->help == 0)
+			stp->help = 1;
+		else
+			stp->help = 0;
+		redraw(stp);
 	}
-	*/
 	if (key == 53)
 		exit (0);
-	printf("%d\n", key);
+	//printf("%d\n", key);
 	return (0);
 }

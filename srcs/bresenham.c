@@ -20,37 +20,39 @@ void	ft_vertical_line(int x, int y0, int y1, t_setup *setup)
 		y0++;
 	}	
 }
+
+/*
 void	ft_bresenham(int xi, int yi, int xf, int yf, t_setup *setup)
 {
 	int dx,dy,i,xinc,yinc,cumul,x,y;
-	x = xi ;
-	y = yi ;
-	dx = xf - xi ;
-	dy = yf - yi ;
-	xinc = ( dx > 0 ) ? 1 : -1 ;
-	yinc = ( dy > 0 ) ? 1 : -1 ;
-	dx = abs(dx) ;
-	dy = abs(dy) ;
+	x = xi;
+	y = yi;
+	dx = xf - xi;
+	dy = yf - yi;
+	xinc = ( dx > 0) ? 1 : -1;
+	yinc = ( dy > 0) ? 1 : -1;
+	dx = abs(dx);
+	dy = abs(dy);
 	check_and_draw(setup, hpt(x + WIDTH / 2, y + HEIGHT / 2, 0, 0));
-	if ( dx > dy ) 
+	if ( dx > dy) 
 	{
 		cumul = dx / 2;
-		for ( i = 1 ; i <= dx ; i++ ) 
+		for ( i = 1; i <= dx; i++) 
 		{
-			x += xinc ;
-			cumul += dy ;
-			if ( cumul >= dx ) 
+			x += xinc;
+			cumul += dy;
+			if ( cumul >= dx) 
 			{
-				cumul -= dx ;
-				y += yinc ; 
+				cumul -= dx;
+				y += yinc; 
 			}
 			check_and_draw(setup, hpt(x + WIDTH / 2, y + HEIGHT / 2, 0, 0));
 		} 
 	}
 	else 
 	{
-		cumul = dy / 2 ;
-		for ( i = 1 ; i <= dy ; i++ ) 
+		cumul = dy / 2;
+		for (i = 1; i <= dy; i++) 
 		{
 			y += yinc;
 			cumul += dx;
@@ -60,6 +62,55 @@ void	ft_bresenham(int xi, int yi, int xf, int yf, t_setup *setup)
 				x += xinc; 
 			}
 			check_and_draw(setup, hpt(x + WIDTH / 2, y + HEIGHT / 2, 0, 0));
+		} 
+	}
+}
+*/
+
+void	ft_bresenham(t_hpt p1, t_hpt p2, int **img)
+{
+	int dx,dy,i,xinc,yinc,cumul,x,y;
+
+	x = p1.x;
+	y = p1.y;
+	dx = p2.x - p1.x;
+	dy = p2.y - p1.y;
+	xinc = (dx > 0) ? 1 : -1;
+	yinc = (dy > 0) ? 1 : -1;
+	dx = ABS(dx);
+	dy = ABS(dy);
+	check_and_draw(img, hpt(x + WIDTH / 2, y + HEIGHT / 2, 0, 0), p2.color);
+	i = 1;
+	if (dx > dy) 
+	{
+		cumul = dx / 2;
+		while (i <= dx) 
+		{
+			x += xinc;
+			cumul += dy;
+			if (cumul >= dx) 
+			{
+				cumul -= dx;
+				y += yinc; 
+			}
+			check_and_draw(img, hpt(x + WIDTH / 2, y + HEIGHT / 2, 0, 0), p2.color);
+			i++;
+		} 
+	}
+	else 
+	{
+		cumul = dy / 2;
+		while (i <= dy) 
+		{
+			y += yinc;
+			cumul += dx;
+			if (cumul >= dy) 
+			{
+				cumul -= dy;
+				x += xinc; 
+			}
+			check_and_draw(img, hpt(x + WIDTH / 2, y + HEIGHT / 2, 0, 0), p2.color);
+			i++;
 		} 
 	}
 }
@@ -95,45 +146,3 @@ x0++;
 }
 }
  */
-
-void	ft_newbresenham(int x0, int y0, int x1, int y1, t_setup *setup)
-{
-	int		steep;
-	int		dx;
-	int		dy;
-	int		err;
-	int		derr;
-	int		y;
-
-	steep = 0;
-	if (ABS(x0 - x1) < ABS(y0 - y1))
-	{
-		ft_swap(&x0, &y0);
-		ft_swap(&x1, &y1);
-		steep = 1;
-	}
-	if (x0 > x1)
-	{
-		ft_swap(&x0, &x1);
-		ft_swap(&y0, &y1);
-	}
-	dx = x1 - x0;
-	dy = y1 - y0;
-	derr = ABS(dy) * 2;
-	err = 0;
-	y = y0;
-	while (x0 < x1)
-	{
-		if (steep)
-			check_and_draw(setup, hpt(y + HEIGHT / 2, x0 + WIDTH / 2, 0, 0));
-		else
-			check_and_draw(setup, hpt(x0 + WIDTH / 2, y + HEIGHT / 2, 0, 0));
-		err += derr;
-		if (err > dx)
-		{
-			y += (y1 > y0 ? 1 : -1);
-			err -= dx * 2;
-		}
-		x0++;
-	}
-}

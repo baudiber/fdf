@@ -93,6 +93,7 @@ struct				s_setup
 	int				ac;
 	char			*av;
 	int				*data;
+	int				help;
 	int				bpx;
 	int				s_line;
 	int				ed;
@@ -108,7 +109,6 @@ void				parser(t_setup *setup);
 void				ft_errors(int type);
 void				init_all(t_setup *stp);
 void				fdf(t_setup *stp);
-void				ft_bresenham(int x0, int y0, int x1, int y1, t_setup *setup);
 void				create_window(char *str, t_setup *setup);
 int					deal_key(int key, t_setup *stp);
 void				display_splash(t_setup *setup);
@@ -130,7 +130,8 @@ t_hpt				mult_4x4mat_hpt(t_mat4x4 mat, t_hpt p);
 void				display_dots(t_setup *stp);
 void				display_lines(t_setup *stp);
 t_hpt				apply_pers_hpt(t_hpt p, t_scene *s);
-void				check_and_draw(t_setup *stp, t_hpt pt);
-void				ft_newbresenham(int x0, int y0, int x1, int y1, t_setup *setup);
+void				check_and_draw(int **img, t_hpt pt, unsigned int color);
+void				ft_bresenham(t_hpt p1, t_hpt p2, int **img);
+void				display_help(t_setup *stp);
 
 #endif

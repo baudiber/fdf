@@ -30,10 +30,15 @@ void	splash_art(t_setup *stp)
 	}
 }
 
+void	fdf_art(int **img)
+{
+	ft_bresenham(hpt(50, 50, 0, 0), hpt(70, 50, 0, 0), img);	
+}
+
 void	display_splash(t_setup *stp)
 {
 	splash_art(stp);
-	//bresenham_art
+	fdf_art(&stp->data);
 	mlx_put_image_to_window(stp->data, stp->win_ptr, stp->img_ptr, 0, 0);
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, WIDTH / 2 - 50, \
 			HEIGHT / 2 - 20, 0xFFFFFF, "Wireframe v0.1");
