@@ -67,6 +67,10 @@ re:
 	@$(MAKE) fclean
 	@$(MAKE)
 
+run:
+	@$(MAKE)
+	@./$(NAME) test_maps/$(map)
+
 test: 
 	@$(MAKE)
 	@./$(NAME) test_maps/42.fdf

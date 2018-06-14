@@ -41,9 +41,9 @@ void	cam_pos_wasd(int key, t_setup *stp)
 void	scene_rot_ikjl(int key, t_setup *stp)
 {
 	if (key == 34)
-		stp->scene.rot.x -= 0.1;
-	if (key == 40)
 		stp->scene.rot.x += 0.1;
+	if (key == 40)
+		stp->scene.rot.x -= 0.1;
 	if (key == 38)
 		stp->scene.rot.y -= 0.1;
 	if (key == 37)
@@ -59,7 +59,7 @@ void	arrow_udlr(int key, t_setup *stp)
 		stp->map.scale.z += 100;
 		stp->map.scale.x += 100;
 	}
-	if (key == 125)
+	if (key == 125 && stp->map.scale.y > 0)
 	{
 		stp->map.scale.y -= 100;
 		stp->map.scale.z -= 100;
