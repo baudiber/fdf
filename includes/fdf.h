@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/05 23:34:39 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/21 00:46:19 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,6 @@ void				ft_bresenham(t_hpt p1, t_hpt p2, int **img);
 void				display_help(t_setup *stp);
 int					keys(int key, t_setup *stp);
 void				cam_scene_settings(t_setup *stp);
+t_hpt				clipping(t_hpt p1);
 
 #endif

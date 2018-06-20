@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 18:30:12 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/05 23:33:39 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/21 00:40:02 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	cam_pos_wasd(int key, t_setup *stp)
 {
 	if (key == 13)
 	{
-		stp->scene.cam.from.y += 10;
-		stp->scene.cam.to.y += 10;
+		stp->scene.cam.from.z -= 10;
+		stp->scene.cam.to.z -= 10;
 	}
 	if (key == 0)
 	{
@@ -27,8 +27,8 @@ void	cam_pos_wasd(int key, t_setup *stp)
 	}
 	if (key == 1)
 	{
-		stp->scene.cam.from.y -= 10;
-		stp->scene.cam.to.y -= 10;
+		stp->scene.cam.from.z += 10;
+		stp->scene.cam.to.z += 10;
 	}
 	if (key == 2)
 	{

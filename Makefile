@@ -18,7 +18,8 @@ SRC			=	main.c \
 				ops.c \
 				display.c \
 				pers.c \
-				keys.c
+				keys.c \
+				clipping.c
 
 CC 			=	gcc
 FLAGS		=	-Wall -Werror -Wextra
