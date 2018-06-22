@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/21 00:46:19 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/22 12:56:54 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ struct				s_setup
 	double			mat[3][3];
 };
 
-void				parser(t_setup *setup);
+void				parser(t_setup *setup, char *map);
 void				ft_errors(int type);
 void				init_all(t_setup *stp);
 void				fdf(t_setup *stp);

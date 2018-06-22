@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 23:19:25 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/23 01:39:25 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/22 12:57:12 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		main(int ac, char **av)
 	{
 		ft_bzero(&stp, sizeof(t_setup));
 		stp.av = av[1];
-		parser(&stp); 
+		parser(&stp, stp.av); 
 		printf("ptnb: %d\n", stp.ptnb);
 		printf("highest: %d\n", stp.map.highest);
 		init_all(&stp);

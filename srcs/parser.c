@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:54:27 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/23 01:37:18 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/22 12:57:26 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int		parse_lines(t_rows **rows, t_setup *stp)
 	return (0);
 }
 
-void			parser(t_setup *stp)
+void			parser(t_setup *stp, char *map)
 {
 	int		fd;
 	int		ret;
@@ -100,7 +100,7 @@ void			parser(t_setup *stp)
 	if (!(rows = (t_rows *)malloc(sizeof(t_rows))))
 		ft_errors(3);
 	tmp = rows;
-	if ((fd = open(stp->av, O_RDONLY)) == -1)
+	if ((fd = open(map, O_RDONLY)) == -1)
 		ft_errors(1);
 	while ((ret = get_next_line(fd, &tmp->line)) > 0)
 	{
