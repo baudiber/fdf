@@ -18,3 +18,21 @@ void	ft_errors(int type)
 		exit (0);
 	}
 }
+
+void	free_all(t_setup *stp)
+{
+	free(stp->map.npts);
+	free(stp->map.tpts);
+}
+
+void	free_ll(t_rows *head)
+{
+	t_rows	*tmp;
+
+	while(head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+}

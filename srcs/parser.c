@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:54:27 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/22 12:57:26 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/25 22:24:11 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void		get_points(t_rows **rows, t_setup *stp)
 			ptcnt++;
 			i++;
 		}
+		ft_freetab(tmp->tab);
 		y++;
 		tmp = tmp->next;
 	}
@@ -116,4 +117,5 @@ void			parser(t_setup *stp, char *map)
 	tmp->tab = NULL;
 	if (ret == -1 || parse_lines(&rows, stp))
 		ft_errors(2);
+	free_ll(rows);
 }

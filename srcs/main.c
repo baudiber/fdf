@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 23:19:25 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/22 12:57:12 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/25 22:23:39 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int		main(int ac, char **av)
 		printf("highest: %d\n", stp.map.highest);
 		init_all(&stp);
 		fdf(&stp);
-		//display(&stp);
 	}
 	return (0);
 }

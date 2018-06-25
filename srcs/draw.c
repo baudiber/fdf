@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:29:49 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/22 12:38:48 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/25 20:21:11 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,20 +103,13 @@ void	draw(t_setup *stp)
 
 void	redraw(t_setup *stp)
 {
-//	int		i;
-//
-//	i = 0;
-//	while (i < stp->ptnb)
-//	{
-//		printf("pt %d x:%f y:%f z:%f w:%f\n", i, stp->map.tpts[i].x,\
-//		stp->map.tpts[i].y, stp->map.tpts[i].z, stp->map.tpts[i].w);
-//		i++;
-//	}
+	/*
 	printf("-----------------------------------------------------\n\n");
 	printf("mapscale y %f z %f x %f\n", stp->map.scale.y,stp->map.scale.z,stp->map.scale.x);
 	printf("scenerot y %f x %f\n", stp->scene.rot.y,stp->scene.rot.x);
 	printf("camposfrom z %f x %f\n", stp->scene.cam.from.z,stp->scene.cam.from.x);
 	printf("camposto z %f x %f\n", stp->scene.cam.to.z,stp->scene.cam.to.x);
+	*/
 	reset_img(stp);
 	draw(stp);
 	mlx_put_image_to_window(stp->data, stp->win_ptr, stp->img_ptr, 0, 0);

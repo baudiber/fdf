@@ -22,7 +22,7 @@ SRC			=	main.c \
 				clipping.c
 
 CC 			=	gcc
-FLAGS		=	-Wall -Werror -Wextra
+FLAGS		=	-Wall -Werror -Wextra -g3
 INCLUDES	=	-I $(INC_DIR)
 HEADER_H	=	$(INC_DIR)/$(NAME).h
 OBJ 		=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))

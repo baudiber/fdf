@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:29:44 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/21 00:52:02 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/25 20:04:10 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ void	display_help(t_setup *stp)
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 65, 0xFF0000, "r = Switch Dots/Lines");
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 85, 0xFF0000, "p = Switch pers Orthographique / Conique");
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 105, 0xFF0000, "b = Back to default / Reset");
-	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 125, 0xFF0000, "Esc = Exit FDF");
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 125, 0xFF0000, "left/right arrows = increase elevation");
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 145, 0xFF0000, "Esc = Exit FDF");
 }

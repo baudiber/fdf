@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 18:30:12 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/21 00:40:02 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/25 20:54:35 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	stp_rpbh(int key, t_setup *stp)
 	}
 	if (key == 11)
 	{
+		stp->map.scale = hpt(800, 800, 800, 1);
 		stp->scene.rot = hpt(0, 0, 0, 1); 
 		stp->scene.cam.from = hpt(0, 1000, 1000, 1);
 		stp->scene.cam.to = hpt(0, 0, 0, 1);
@@ -117,7 +118,10 @@ int		stp_key(int key, t_setup *stp)
 			stp->splash = 1;
 	}
 	if (key == 53)
+	{
+		free_all(stp);
 		exit (0);
+	}
 	if (stp->splash)
 		stp_rpbh(key, stp);
 	redraw(stp);

@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/22 12:56:54 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/25 21:52:26 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,7 @@ void				display_help(t_setup *stp);
 int					keys(int key, t_setup *stp);
 void				cam_scene_settings(t_setup *stp);
 t_hpt				clipping(t_hpt p1);
+void				free_all(t_setup *stp);
+void				free_ll(t_rows *head);
 
 #endif
