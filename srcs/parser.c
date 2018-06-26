@@ -20,6 +20,15 @@ unsigned int	point_color(char *str)
 	return ((color) ? color : 0xFFFFFF);
 }
 
+void			get_points2(t_hpt *pt, char *str, int i, int y)
+{
+	pt->color = point_color(str);
+	pt->x = i;
+	pt->y = y;
+	pt->z = ft_atoi(str);
+	pt->w = 1.0;
+}
+
 static void		get_points(t_rows **rows, t_setup *stp)
 {
 	t_rows	*tmp;
@@ -35,13 +44,9 @@ static void		get_points(t_rows **rows, t_setup *stp)
 		i = 0;
 		while (i < stp->linelen)
 		{
-			stp->map.pts[ptcnt].color = point_color(tmp->tab[i]);
-			stp->map.pts[ptcnt].x = i;
-			stp->map.pts[ptcnt].y = y;
-			stp->map.pts[ptcnt].z = ft_atoi(tmp->tab[i]);
+			get_points2(&stp->map.pts[ptcnt], tmp->tab[i], i, y);
 			stp->map.highest = (ABS(stp->map.pts[ptcnt].z) > stp->map.highest)\
 							   ? ABS(stp->map.pts[ptcnt].z) : stp->map.highest;
-			stp->map.pts[ptcnt].w = 1.0;
 			ptcnt++;
 			i++;
 		}
@@ -88,7 +93,7 @@ static int		parse_lines(t_rows **rows, t_setup *stp)
 	if (!(stp->map.pts = (t_hpt *)malloc(sizeof(t_hpt) * stp->ptnb)))
 		ft_errors(3);	
 	get_points(rows, stp);
-	free_ll(rows);
+	free_ll(*rows);
 	return (0);
 }
 
