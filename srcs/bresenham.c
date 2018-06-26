@@ -6,65 +6,63 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 18:25:28 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/25 20:40:09 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/26 16:19:03 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_vertical_line(int x, int y0, int y1, t_setup *setup)
+void	ft_bresenham2(t_bres *bres, int **img, unsigned int color)
 {
-	while (y0 < y1)
+	bres->cumul = bres->dy / 2;
+	while (bres->i <= bres->dy) 
 	{
-		setup->data[WIDTH * y0 + x] = 0xFFFFFF;
-		y0++;
-	}	
+		bres->y += bres->yinc;
+		bres->cumul += bres->dx;
+		if (bres->cumul >= bres->dy) 
+		{
+			bres->cumul -= bres->dy;
+			bres->x += bres->xinc; 
+		}
+		check_and_draw(img, hpt(bres->x + WIDTH / 2, \
+					bres->y + HEIGHT / 2, 0, 0), color);
+		bres->i++;
+	} 
 }
 
-void	ft_bresenham(t_hpt p1, t_hpt p2, int **img)
+void	ft_bresenham1(t_bres *bres, int **img, unsigned int color)
 {
-	int dx,dy,i,xinc,yinc,cumul,x,y;
+	bres->cumul = bres->dx / 2;
+	while (bres->i <= bres->dx) 
+	{
+		bres->x += bres->xinc;
+		bres->cumul += bres->dy;
+		if (bres->cumul >= bres->dx) 
+		{
+			bres->cumul -= bres->dx;
+			bres->y += bres->yinc; 
+		}
+		check_and_draw(img, hpt(bres->x + WIDTH / 2, \
+					bres->y + HEIGHT / 2, 0, 0), color);
+		bres->i++;
+	} 
+}
 
-	x = p1.x;
-	y = p1.y;
-	dx = p2.x - p1.x;
-	dy = p2.y - p1.y;
-	xinc = (dx > 0) ? 1 : -1;
-	yinc = (dy > 0) ? 1 : -1;
-	dx = ABS(dx);
-	dy = ABS(dy);
-	check_and_draw(img, hpt(x + WIDTH / 2, y + HEIGHT / 2, 0, 0), p2.color);
-	i = 1;
-	if (dx > dy) 
-	{
-		cumul = dx / 2;
-		while (i <= dx) 
-		{
-			x += xinc;
-			cumul += dy;
-			if (cumul >= dx) 
-			{
-				cumul -= dx;
-				y += yinc; 
-			}
-			check_and_draw(img, hpt(x + WIDTH / 2, y + HEIGHT / 2, 0, 0), p2.color);
-			i++;
-		} 
-	}
+void	ft_bresenham(t_hpt p1, t_hpt p2, t_bres *bres, int **img)
+{
+	bres->x = p1.x;
+	bres->y = p1.y;
+	bres->dx = p2.x - p1.x;
+	bres->dy = p2.y - p1.y;
+	bres->xinc = (bres->dx > 0) ? 1 : -1;
+	bres->yinc = (bres->dy > 0) ? 1 : -1;
+	bres->dx = ABS(bres->dx);
+	bres->dy = ABS(bres->dy);
+	bres->i = 1;
+	check_and_draw(img, hpt(bres->x + WIDTH / 2, bres->y + HEIGHT / 2, 0, 0), \
+			p2.color);
+	if (bres->dx > bres->dy) 
+		ft_bresenham1(bres, img, p2.color);
 	else 
-	{
-		cumul = dy / 2;
-		while (i <= dy) 
-		{
-			y += yinc;
-			cumul += dx;
-			if (cumul >= dy) 
-			{
-				cumul -= dy;
-				x += xinc; 
-			}
-			check_and_draw(img, hpt(x + WIDTH / 2, y + HEIGHT / 2, 0, 0), p2.color);
-			i++;
-		} 
-	}
+		ft_bresenham2(bres, img, p2.color);
 }

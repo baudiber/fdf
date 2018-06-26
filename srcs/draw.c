@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:29:49 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/25 20:21:11 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/26 16:46:06 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,30 +91,42 @@ void	get_new_pts(t_map *map, int len)
 
 void	draw(t_setup *stp)
 {
+	int		i;
+
 	get_scene_mat(&stp->scene);
 	get_cam_mat(&stp->scene);
 	get_map_mat(&stp->scene, &stp->map);
 	get_new_pts(&stp->map, stp->ptnb); 
+	i = 0;
+	while (i < stp->ptnb)
+	{
+		if (stp->scene.pers == 1)
+			stp->map.npts[i] = apply_pers_hpt(stp->map.npts[i], &stp->scene);
+		stp->map.npts[i].z = (stp->map.npts[i].z - stp->scene.cam.near) \
+							 / stp->scene.cam.far;
+		if (stp->scene.dot == 1)
+			draw_dot(&stp->data, stp->map.npts[i]);
+		i++;
+	}
 	if (stp->scene.dot == 0)
 		display_lines(stp);
-	else if (stp->scene.dot == 1)
-		display_dots(stp);
 }
 
 void	redraw(t_setup *stp)
 {
 	/*
-	printf("-----------------------------------------------------\n\n");
-	printf("mapscale y %f z %f x %f\n", stp->map.scale.y,stp->map.scale.z,stp->map.scale.x);
-	printf("scenerot y %f x %f\n", stp->scene.rot.y,stp->scene.rot.x);
-	printf("camposfrom z %f x %f\n", stp->scene.cam.from.z,stp->scene.cam.from.x);
-	printf("camposto z %f x %f\n", stp->scene.cam.to.z,stp->scene.cam.to.x);
-	*/
+	   printf("-----------------------------------------------------\n\n");
+	   printf("mapscale y %f z %f x %f\n", stp->map.scale.y,stp->map.scale.z,stp->map.scale.x);
+	   printf("scenerot y %f x %f\n", stp->scene.rot.y,stp->scene.rot.x);
+	   printf("camposfrom z %f x %f\n", stp->scene.cam.from.z,stp->scene.cam.from.x);
+	   printf("camposto z %f x %f\n", stp->scene.cam.to.z,stp->scene.cam.to.x);
+	   */
 	reset_img(stp);
 	draw(stp);
 	mlx_put_image_to_window(stp->data, stp->win_ptr, stp->img_ptr, 0, 0);
 	if (stp->help)
 		display_help(stp);
 	else
-		mlx_string_put(stp->mlx_ptr, stp->win_ptr, 850, 695, 0xFFFFFF, "Press h for help");
+		mlx_string_put(stp->mlx_ptr, stp->win_ptr, 850, 695, 0xFFFFFF, \
+				"Press h for help");
 }

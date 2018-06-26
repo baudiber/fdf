@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/25 21:52:26 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/26 16:38:35 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_setup	t_setup;
 typedef struct s_mat4x4 t_mat4x4;
 typedef struct s_cam	t_cam;
 typedef struct s_scene	t_scene;
+typedef struct s_bres	t_bres;
 
 struct				s_hpt
 {
@@ -83,10 +84,23 @@ struct				s_map
 	t_hpt			pos;
 };
 
+struct				s_bres
+{
+	int				cumul;
+	int				i;
+	int				x;
+	int				y;
+	int				dx;
+	int				dy;
+	int				xinc;
+	int				yinc;
+};
+
 struct				s_setup
 {
 	t_map			map;
 	t_scene			scene;
+	t_bres			bres;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
@@ -127,11 +141,11 @@ t_mat4x4			rot_mat_y(float y);
 t_mat4x4			rot_mat_z(float z);
 t_mat4x4			rot_mat_pos(t_hpt vec);
 t_hpt				mult_4x4mat_hpt(t_mat4x4 mat, t_hpt p);
-void				display_dots(t_setup *stp);
 void				display_lines(t_setup *stp);
+void				draw_dot(int **img, t_hpt pt);
 t_hpt				apply_pers_hpt(t_hpt p, t_scene *s);
 void				check_and_draw(int **img, t_hpt pt, unsigned int color);
-void				ft_bresenham(t_hpt p1, t_hpt p2, int **img);
+void				ft_bresenham(t_hpt p1, t_hpt p2, t_bres *bres, int **img);
 void				display_help(t_setup *stp);
 int					keys(int key, t_setup *stp);
 void				cam_scene_settings(t_setup *stp);
