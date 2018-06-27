@@ -67,11 +67,11 @@ void	arrow_udlr(int key, t_setup *stp)
 	}
 	if (key == 123)
 	{
-		stp->map.scale.y -= 100;
+		stp->map.scale.y /= 1.2;
 	}
 	if (key == 124)
 	{
-		stp->map.scale.y += 100;
+		stp->map.scale.y *= 1.2;
 	}
 	redraw(stp);
 }
