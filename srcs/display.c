@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:29:44 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/05 21:30:57 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/26 16:44:29 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	check_and_draw(int **img, t_hpt pt, unsigned int color)
 {
-	if ((int)pt.x <= 0 || (int)pt.x > WIDTH - 2 || (int)pt.y <= 0 || (int)pt.y > HEIGHT - 2)
+	if ((int)pt.x <= 0 || (int)pt.x > WIDTH - 2 || (int)pt.y <= 0 || \
+			(int)pt.y > HEIGHT - 2)
 		return ;
-	//(*img)[(int)pt.y * WIDTH + (int)pt.x] = 0xFFFFFF;
 	(*img)[(int)pt.y * WIDTH + (int)pt.x] = color;
 }
 
@@ -27,36 +27,11 @@ void	draw_dot(int **img, t_hpt pt)
 	check_and_draw(img, pt, pt.color);
 }
 
-void	display_dots(t_setup *stp)
-{
-	int		i;
-
-	i = 0;
-	while (i < stp->ptnb)
-	{
-		if (stp->scene.pers == 1)
-			stp->map.npts[i] = apply_pers_hpt(stp->map.npts[i], &stp->scene);
-		stp->map.npts[i].z = (stp->map.npts[i].z - stp->scene.cam.near) / stp->scene.cam.far;
-		draw_dot(&stp->data, stp->map.npts[i]);
-		i++;
-	}
-}
-
 void	display_lines(t_setup *stp)
 {
 	int		x;
 	int		y;
 
-	int		i;
-
-	i = 0;
-	while (i < stp->ptnb)
-	{
-		if (stp->scene.pers == 1)
-			stp->map.npts[i] = apply_pers_hpt(stp->map.npts[i], &stp->scene);
-		stp->map.npts[i].z = (stp->map.npts[i].z - stp->scene.cam.near) / stp->scene.cam.far;
-		i++;
-	}
 	y = 0;
 	while (y < stp->ynb)
 	{
@@ -64,11 +39,11 @@ void	display_lines(t_setup *stp)
 		while (x < (y + 1) * stp->linelen)
 		{
 			if (x < ( y + 1) * stp->linelen - 1)
-				ft_bresenham(stp->map.npts[x], stp->map.npts[x + 1], &stp->data);
+				ft_bresenham(stp->map.npts[x], stp->map.npts[x + 1], \
+						&stp->bres, &stp->data);
 			if (x < stp->lastrow)
-			{
-				ft_bresenham(stp->map.npts[x], stp->map.npts[x + stp->linelen], &stp->data);
-			}
+				ft_bresenham(stp->map.npts[x], stp->map.npts[x +\
+					   	stp->linelen], &stp->bres, &stp->data);
 			x++;
 		}
 		y++;
@@ -77,11 +52,20 @@ void	display_lines(t_setup *stp)
 
 void	display_help(t_setup *stp)
 {
-	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 5, 0xFF0000, "w, a, s, d = Move camera");
-	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 25, 0xFF0000, "up / down arrows = Zoom");
-	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 45, 0xFF0000, "i, j, k, l = Rotation");
-	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 65, 0xFF0000, "r = Switch Dots/Lines");
-	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 85, 0xFF0000, "p = Switch pers Orthographique / Conique");
-	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 105, 0xFF0000, "b = Back to default / Reset");
-	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 125, 0xFF0000, "Esc = Exit FDF");
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 5, 0xFF0000, \
+			"w, a, s, d = Move camera");
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 25, 0xFF0000, \
+			"up / down arrows = Zoom");
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 45, 0xFF0000, \
+			"i, j, k, l = Rotation");
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 65, 0xFF0000, \
+			"r = Switch Dots/Lines");
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 85, 0xFF0000, \
+			"p = Switch pers Orthographique / Conique");
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 105, 0xFF0000, \
+			"b = Back to default / Reset");
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 125, 0xFF0000, \
+			"left/right arrows = increase elevation");
+	mlx_string_put(stp->mlx_ptr, stp->win_ptr, 5, 145, 0xFF0000, \
+			"Esc = Exit FDF");
 }

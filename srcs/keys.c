@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interaction.c                                      :+:      :+:    :+:   */
+/*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/09 18:30:12 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/05 23:33:39 by baudiber         ###   ########.fr       */
+/*   Created: 2018/06/26 17:31:08 by baudiber          #+#    #+#             */
+/*   Updated: 2018/06/26 17:31:10 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	cam_pos_wasd(int key, t_setup *stp)
 {
 	if (key == 13)
 	{
-		stp->scene.cam.from.y += 10;
-		stp->scene.cam.to.y += 10;
+		stp->scene.cam.from.z -= 10;
+		stp->scene.cam.to.z -= 10;
 	}
 	if (key == 0)
 	{
@@ -27,8 +27,8 @@ void	cam_pos_wasd(int key, t_setup *stp)
 	}
 	if (key == 1)
 	{
-		stp->scene.cam.from.y -= 10;
-		stp->scene.cam.to.y -= 10;
+		stp->scene.cam.from.z += 10;
+		stp->scene.cam.to.z += 10;
 	}
 	if (key == 2)
 	{
@@ -94,6 +94,7 @@ void	stp_rpbh(int key, t_setup *stp)
 	}
 	if (key == 11)
 	{
+		stp->map.scale = hpt(800, 800, 800, 1);
 		stp->scene.rot = hpt(0, 0, 0, 1); 
 		stp->scene.cam.from = hpt(0, 1000, 1000, 1);
 		stp->scene.cam.to = hpt(0, 0, 0, 1);
@@ -117,7 +118,10 @@ int		stp_key(int key, t_setup *stp)
 			stp->splash = 1;
 	}
 	if (key == 53)
+	{
+		free_all(stp);
 		exit (0);
+	}
 	if (stp->splash)
 		stp_rpbh(key, stp);
 	redraw(stp);

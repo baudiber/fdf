@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   clipping.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/19 23:18:22 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/25 20:21:18 by baudiber         ###   ########.fr       */
+/*   Created: 2018/06/21 00:27:28 by baudiber          #+#    #+#             */
+/*   Updated: 2018/06/21 00:46:30 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	fdf(t_setup *stp)
+t_hpt	clipping(t_hpt p1)
 {
-	display_splash(stp);
-	mlx_key_hook(stp->win_ptr, stp_key, stp);
-	mlx_hook(stp->win_ptr, 2, (1L << 0), keys, stp);
-	mlx_loop(stp->mlx_ptr);
+	if (p1.x < 0)
+		p1.x = 1;
+	if (p1.y < 0)
+		p1.y = 1;
+	if (p1.x > WIDTH - 2)
+		p1.x = WIDTH - 2;
+	if (p1.y > HEIGHT - 2)
+		p1.y = HEIGHT - 2;
+	return (p1);
 }

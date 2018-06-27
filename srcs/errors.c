@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/26 17:30:52 by baudiber          #+#    #+#             */
+/*   Updated: 2018/06/26 17:30:54 by baudiber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	ft_errors(int type)
@@ -16,5 +28,23 @@ void	ft_errors(int type)
 	{
 		write(1, "malloc error\n", 13);
 		exit (0);
+	}
+}
+
+void	free_all(t_setup *stp)
+{
+	free(stp->map.npts);
+	free(stp->map.tpts);
+}
+
+void	free_ll(t_rows *head)
+{
+	t_rows	*tmp;
+
+	while(head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
 	}
 }

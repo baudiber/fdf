@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:54:27 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/23 01:37:18 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/26 16:48:22 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ unsigned int	point_color(char *str)
 
 	color = ft_getcolor(str);
 	return ((color) ? color : 0xFFFFFF);
+}
+
+void			get_points2(t_hpt *pt, char *str, int i, int y)
+{
+	pt->color = point_color(str);
+	pt->x = i;
+	pt->y = y;
+	pt->z = ft_atoi(str);
+	pt->w = 1.0;
 }
 
 static void		get_points(t_rows **rows, t_setup *stp)
@@ -35,15 +44,13 @@ static void		get_points(t_rows **rows, t_setup *stp)
 		i = 0;
 		while (i < stp->linelen)
 		{
-			stp->map.pts[ptcnt].color = point_color(tmp->tab[i]);
-			stp->map.pts[ptcnt].x = i;
-			stp->map.pts[ptcnt].y = y;
-			stp->map.pts[ptcnt].z = ft_atoi(tmp->tab[i]);
-			stp->map.highest = (ABS(stp->map.pts[ptcnt].z) > stp->map.highest) ? ABS(stp->map.pts[ptcnt].z) : stp->map.highest;
-			stp->map.pts[ptcnt].w = 1.0;
+			get_points2(&stp->map.pts[ptcnt], tmp->tab[i], i, y);
+			stp->map.highest = (ABS(stp->map.pts[ptcnt].z) > stp->map.highest)\
+							   ? ABS(stp->map.pts[ptcnt].z) : stp->map.highest;
 			ptcnt++;
 			i++;
 		}
+		ft_freetab(tmp->tab);
 		y++;
 		tmp = tmp->next;
 	}
@@ -86,10 +93,11 @@ static int		parse_lines(t_rows **rows, t_setup *stp)
 	if (!(stp->map.pts = (t_hpt *)malloc(sizeof(t_hpt) * stp->ptnb)))
 		ft_errors(3);	
 	get_points(rows, stp);
+	free_ll(*rows);
 	return (0);
 }
 
-void			parser(t_setup *stp)
+void			parser(t_setup *stp, char *map)
 {
 	int		fd;
 	int		ret;
@@ -100,7 +108,7 @@ void			parser(t_setup *stp)
 	if (!(rows = (t_rows *)malloc(sizeof(t_rows))))
 		ft_errors(3);
 	tmp = rows;
-	if ((fd = open(stp->av, O_RDONLY)) == -1)
+	if ((fd = open(map, O_RDONLY)) == -1)
 		ft_errors(1);
 	while ((ret = get_next_line(fd, &tmp->line)) > 0)
 	{

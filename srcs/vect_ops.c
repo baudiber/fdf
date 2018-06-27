@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vect&quat.c                                        :+:      :+:    :+:   */
+/*   vect_ops.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/08 00:12:41 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/23 01:11:28 by baudiber         ###   ########.fr       */
+/*   Created: 2018/06/26 17:31:31 by baudiber          #+#    #+#             */
+/*   Updated: 2018/06/26 17:32:51 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ t_hpt	mult_4x4mat_hpt(t_mat4x4 mat, t_hpt p)
 {
 	t_hpt	res;
 
-	res.x = mat.m[0][0] * p.x + mat.m[0][1] * p.y + mat.m[0][2] * p.z + mat.m[0][3] * p.w;
-	res.y = mat.m[1][0] * p.x + mat.m[1][1] * p.y + mat.m[1][2] * p.z + mat.m[1][3] * p.w;
-	res.z = mat.m[2][0] * p.x + mat.m[2][1] * p.y + mat.m[2][2] * p.z + mat.m[2][3] * p.w;
+	res.x = mat.m[0][0] * p.x + mat.m[0][1] * p.y + mat.m[0][2] * \
+			p.z + mat.m[0][3] * p.w;
+	res.y = mat.m[1][0] * p.x + mat.m[1][1] * p.y + mat.m[1][2] * \
+			p.z + mat.m[1][3] * p.w;
+	res.z = mat.m[2][0] * p.x + mat.m[2][1] * p.y + mat.m[2][2] * \
+			p.z + mat.m[2][3] * p.w;
 	res.w = mat.m[3][0] * p.x + mat.m[3][1] * p.y + mat.m[3][2] * p.z + mat.m[3][3] * p.w;
 	return (res);
 }
@@ -91,17 +94,6 @@ t_hpt	sub_vects(t_hpt a, t_hpt b)
 	res.w = a.w - b.w;
 	return (res);
 }
-/*
-t_hpt	cross_product(t_hpt v0, t_hpt v1)
-{
-	t_hpt	res;
-
-	res.x = v0.y * v1.z - v0.z * v1.y;
-	res.y = v0.z * v1.x - v0.x * v1.z;
-	res.z = v0.x * v1.y - v0.y * v1.x;
-	return (res);
-}
-*/
 
 t_hpt	cross_product(t_hpt a, t_hpt b)
 {
@@ -139,47 +131,3 @@ t_hpt	normalize_vect(t_hpt v)
 	}
 	return (v);
 }
-
-/*
-void	get_matrix(t_quat q, t_setup *stp)
-{
-	stp->mat[0][0] = 1 - 2 * ((q.vect.y * q.vect.y) +(q.vect.z * q.vect.z));
-	stp->mat[0][1] = 2 * ((q.vect.x * q.vect.y) - (q.vect.z * q.w));
-	stp->mat[0][2] = 2 * ((q.vect.x * q.vect.z) + (q.vect.y * q.w));
-	stp->mat[1][0] = 2 * ((q.vect.x * q.vect.y) + (q.vect.z * q.w));
-	stp->mat[1][1] = 1 - 2 * ((q.vect.x * q.vect.x) + (q.vect.z * q.vect.z));
-	stp->mat[1][2] = 2 * ((q.vect.y * q.vect.z) - (q.vect.x * q.w));
-	stp->mat[2][0] = 2 * ((q.vect.x * q.vect.z) - (q.vect.y * q.w));
-	stp->mat[2][1] = 2 * ((q.vect.y * q.vect.z) + (q.vect.x * q.w));
-	stp->mat[2][2] = 1 - 2 * ((q.vect.x * q.vect.x) + (q.vect.y * q.vect.y));
-}
-
-double	dot_product(t_vect v0, t_vect v1)
-{
-	return (v0.x * v1.x + v0.y * v1.y + v0.z * v1.z);
-}
-
-
-t_vect	add_vects(t_vect a, t_vect b, t_vect c)
-{
-	t_vect	res;
-
-	res.x = a.x + b.x + c.x;
-	res.y = a.y + b.y + c.y;
-	res.z = a.z + b.z + c.z;
-	return (res);
-}
-
-
-
-t_quat	quaternion_multiplicator(t_quat q0, t_quat q1)
-{
-	t_quat	res;
-
-	res.w = q0.w  * q1.w - dot_product(q0.vect, q1.vect);
-	res.vect = add_vects(scale_vect(q0.w, q1.vect), scale_vect(q1.w, q0.vect), cross_product(q0.vect, q1.vect));
-	//add normalize?
-	res.vect = normalize_vect(res.vect);
-	return (res);
-}
-*/
