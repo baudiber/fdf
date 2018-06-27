@@ -55,15 +55,15 @@ void	arrow_udlr(int key, t_setup *stp)
 {
 	if (key == 126)
 	{
-		stp->map.scale.y += 100;
-		stp->map.scale.z += 100;
-		stp->map.scale.x += 100;
+		stp->map.scale.y *= 1.2;
+		stp->map.scale.z *= 1.2;
+		stp->map.scale.x *= 1.2;
 	}
 	if (key == 125 && stp->map.scale.y > 0)
 	{
-		stp->map.scale.y -= 100;
-		stp->map.scale.z -= 100;
-		stp->map.scale.x -= 100;
+		stp->map.scale.y /= 1.2;
+		stp->map.scale.z /= 1.2;
+		stp->map.scale.x /= 1.2;
 	}
 	if (key == 123)
 	{
@@ -121,7 +121,7 @@ int		stp_key(int key, t_setup *stp)
 	if (stp->splash)
 		stp_rpbh(key, stp);
 	redraw(stp);
-	//printf("%d\n", key);
+	printf("%d\n", key);
 	return (0);
 }
 
