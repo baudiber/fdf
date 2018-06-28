@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:29:44 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/28 00:57:27 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/28 02:17:47 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int		check_pts(t_hpt pt)
 		return (1);
 	return (0);	
 }
-
 
 void	display_lines(t_setup *stp)
 {

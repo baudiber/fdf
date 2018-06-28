@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 17:42:03 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/28 02:03:58 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/28 02:17:41 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,4 @@ void	display_splash(t_setup *stp)
 			390 / 2, 0x00FF00, "Parsing was succesful");
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, WIDTH / 2 - 85, \
 			450 / 2, 0xFFFFFF, "Press Space to start");
-	//parser(stp, stp->av);
 }
