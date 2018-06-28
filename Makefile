@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: baudiber <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/06/29 00:21:25 by baudiber          #+#    #+#              #
+#    Updated: 2018/06/29 00:23:00 by baudiber         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		=	fdf
 
 SRC_DIR		=	./srcs
@@ -15,15 +27,17 @@ SRC			=	main.c \
 				splash.c \
 				vect_ops.c \
 				draw.c \
-				ops.c \
+				rot_ops.c \
 				display.c \
 				pers.c \
 				keys.c \
+				keys2.c \
+				mat_ops.c \
 				clipping.c
 
 CC 			=	gcc
-FLAGS		=	-Wall -Werror -Wextra -g3
-INCLUDES	=	-I $(INC_DIR)
+FLAGS		=	-Wall -Werror -Wextra
+INCLUDES	=	-I $(INC_DIR) -I $(LIB_DIR) -I $(MLX_DIR)
 HEADER_H	=	$(INC_DIR)/$(NAME).h
 OBJ 		=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 MFLAGS		=	-lm -lmlx -framework OpenGL -framework Appkit
@@ -58,7 +72,7 @@ fclean: clean
 	@rm -f $(NAME)
 
 fast:
-	@$(MAKE)	-j
+	@$(MAKE) -j
 
 pyra:
 	@$(MAKE)

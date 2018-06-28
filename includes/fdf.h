@@ -6,18 +6,18 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/28 01:57:36 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/29 00:24:23 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _FDF_H_
-# define _FDF_H_
+#ifndef FDF_H
+# define FDF_H
 # define WIDTH 	1024
 # define HEIGHT 724
 # define ABS(x) ((x > 0) ? x : -x)
 
 # include "mlx.h"
-# include "libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 # include <math.h>
 
@@ -25,7 +25,7 @@ typedef struct s_hpt	t_hpt;
 typedef struct s_rows	t_rows;
 typedef struct s_map	t_map;
 typedef struct s_setup	t_setup;
-typedef struct s_mat4x4 t_mat4x4;
+typedef struct s_mat4x4	t_mat4x4;
 typedef struct s_cam	t_cam;
 typedef struct s_scene	t_scene;
 typedef struct s_bres	t_bres;
@@ -142,6 +142,8 @@ t_mat4x4			rot_mat_y(float y);
 t_mat4x4			rot_mat_z(float z);
 t_mat4x4			rot_mat_pos(t_hpt vec);
 t_hpt				mult_4x4mat_hpt(t_mat4x4 mat, t_hpt p);
+t_mat4x4			get_cam_mat(t_scene *s);
+void				get_scene_mat(t_scene *scene);
 void				display_lines(t_setup *stp);
 void				draw_dot(int **img, t_hpt pt);
 t_hpt				apply_pers_hpt(t_hpt p, t_scene *s);
@@ -153,5 +155,8 @@ void				cam_scene_settings(t_setup *stp);
 t_hpt				clipping(t_hpt p1);
 void				free_all(t_setup *stp);
 void				free_ll(t_rows *head);
+void				reset_view(t_setup *stp);
+void				init_mlx(t_setup *stp);
+void				display_linesclip(t_setup *stp);
 
 #endif

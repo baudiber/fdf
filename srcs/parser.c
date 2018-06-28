@@ -6,23 +6,18 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:54:27 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/26 16:48:22 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/29 00:06:24 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h" 
+#include "fdf.h"
 
-unsigned int	point_color(char *str)
+void			get_points2(t_hpt *pt, char *str, int i, int y)
 {
 	unsigned int	color;
 
 	color = ft_getcolor(str);
-	return ((color) ? color : 0xFFFFFF);
-}
-
-void			get_points2(t_hpt *pt, char *str, int i, int y)
-{
-	pt->color = point_color(str);
+	pt->color = color ? color : 0xFFFFFF;
 	pt->x = i;
 	pt->y = y;
 	pt->z = ft_atoi(str);
@@ -46,7 +41,7 @@ static void		get_points(t_rows **rows, t_setup *stp)
 		{
 			get_points2(&stp->map.pts[ptcnt], tmp->tab[i], i, y);
 			stp->map.highest = (ABS(stp->map.pts[ptcnt].z) > stp->map.highest)\
-							   ? ABS(stp->map.pts[ptcnt].z) : stp->map.highest;
+						? ABS(stp->map.pts[ptcnt].z) : stp->map.highest;
 			ptcnt++;
 			i++;
 		}
@@ -64,7 +59,7 @@ static int		check_line(char *str)
 	while (str[i])
 	{
 		if ((str[i] != ' ' && str[i] != 'x' && str[i] != ',' && str[i] != '-')\
-			   	&& (str[i] < '0' || str[i] > '9') && \
+			&& (str[i] < '0' || str[i] > '9') && \
 				(str[i] < 'A' || str[i] > 'F'))
 			return (1);
 		i++;
@@ -78,20 +73,21 @@ static int		parse_lines(t_rows **rows, t_setup *stp)
 	t_rows	*tmp;
 
 	tmp = *rows;
-	stp->linelen = ft_tablen(tmp->tab);		
+	stp->linelen = ft_tablen(tmp->tab);
 	while (tmp->tab)
 	{
 		stp->ynb++;
 		tmp = tmp->next;
 		if (!tmp->tab)
-			break;
+			break ;
 		len2 = ft_tablen(tmp->tab);
 		if (stp->linelen != len2)
 			return (1);
 	}
+	tmp->next = NULL;
 	stp->ptnb = stp->ynb * stp->linelen;
 	if (!(stp->map.pts = (t_hpt *)malloc(sizeof(t_hpt) * stp->ptnb)))
-		ft_errors(3);	
+		ft_errors(3);
 	get_points(rows, stp);
 	free_ll(*rows);
 	return (0);

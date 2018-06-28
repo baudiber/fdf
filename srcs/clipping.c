@@ -6,21 +6,45 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 00:27:28 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/21 00:46:30 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/28 23:52:33 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_hpt	clipping(t_hpt p1)
+int		check_pts(t_hpt pt)
 {
-	if (p1.x < 0)
-		p1.x = 1;
-	if (p1.y < 0)
-		p1.y = 1;
-	if (p1.x > WIDTH - 2)
-		p1.x = WIDTH - 2;
-	if (p1.y > HEIGHT - 2)
-		p1.y = HEIGHT - 2;
-	return (p1);
+	pt.x += WIDTH / 2;
+	pt.y += HEIGHT / 2;
+	if ((int)pt.x <= 0 || (int)pt.x > WIDTH - 2 || (int)pt.y <= 0 || \
+			(int)pt.y > HEIGHT - 2)
+		return (1);
+	return (0);
+}
+
+void	display_linesclip(t_setup *stp)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < stp->ynb)
+	{
+		x = y * stp->linelen;
+		while (x < (y + 1) * stp->linelen)
+		{
+			if (x < (y + 1) * stp->linelen - 1)
+				if (!check_pts(stp->map.npts[x]) && \
+						!check_pts(stp->map.npts[x + 1]))
+					ft_bresenham(stp->map.npts[x], stp->map.npts[x + 1], \
+						&stp->bres, &stp->data);
+			if (x < stp->lastrow)
+				if (!check_pts(stp->map.npts[x]) && \
+						!check_pts(stp->map.npts[x + stp->linelen]))
+					ft_bresenham(stp->map.npts[x], stp->map.npts[x +\
+						stp->linelen], &stp->bres, &stp->data);
+			x++;
+		}
+		y++;
+	}
 }
