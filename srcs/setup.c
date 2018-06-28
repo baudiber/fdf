@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 23:21:41 by baudiber          #+#    #+#             */
-/*   Updated: 2018/05/30 23:45:41 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/28 00:53:50 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	init_all(t_setup *stp)
 	stp->data = (int *)mlx_get_data_addr(stp->img_ptr, &stp->bpx, &stp->s_line, &stp->ed);
 	stp->splash = 0;
 	stp->help = 0;
+	stp->clip = 0;
 	stp->lastrow = stp->ynb * stp->linelen - stp->linelen; 	
 	stp->map.pos = hpt(0, 0, 0, 1); 
 	stp->map.scale = hpt(800, 800, 800, 1);

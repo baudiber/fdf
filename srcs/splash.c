@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 17:42:03 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/25 20:31:06 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/28 02:03:58 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	splash_art(t_setup *stp)
 void	init_splash_map(t_setup *stp)
 {
 	parser(stp, "test_maps/splash.fdf");
+	init_all(stp);
 	stp->scene.pers = 1;
 	stp->map.scale = hpt(2400, 3800, 2400, 1);
 	stp->scene.rot.y = 5.499988;	
@@ -46,13 +47,14 @@ void	init_splash_map(t_setup *stp)
 
 void	display_splash(t_setup *stp)
 {
+	init_splash_map(stp);
 	splash_art(stp);
-	//init_splash_map(stp);
 	mlx_put_image_to_window(stp->data, stp->win_ptr, stp->img_ptr, 0, 0);
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, WIDTH / 2 - 50, \
-			HEIGHT / 2 - 20, 0xFFFFFF, "Wireframe v0.1");
+			HEIGHT / 2  / 2 - 20, 0xFFFFFF, "Wireframe v0.1");
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, WIDTH / 2 - 90, \
-			390, 0x00FF00, "Parsing was succesful");
+			390 / 2, 0x00FF00, "Parsing was succesful");
 	mlx_string_put(stp->mlx_ptr, stp->win_ptr, WIDTH / 2 - 85, \
-			420, 0xFFFFFF, "Press Space to start");
+			450 / 2, 0xFFFFFF, "Press Space to start");
+	//parser(stp, stp->av);
 }

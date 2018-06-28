@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 19:18:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/26 16:38:35 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/28 01:57:36 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ struct				s_setup
 	int				linelen;
 	int				lastrow;
 	int				splash;
+	int				clip;
 	double			mat[3][3];
 };
 

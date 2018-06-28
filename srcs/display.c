@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:29:44 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/26 16:44:29 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/28 00:57:27 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,51 @@ void	draw_dot(int **img, t_hpt pt)
 	check_and_draw(img, pt, pt.color);
 }
 
+int		check_pts(t_hpt pt)
+{
+	pt.x += WIDTH / 2;
+	pt.y += HEIGHT / 2;
+	if ((int)pt.x <= 0 || (int)pt.x > WIDTH - 2 || (int)pt.y <= 0 || \
+			(int)pt.y > HEIGHT - 2)
+		return (1);
+	return (0);	
+}
+
+
 void	display_lines(t_setup *stp)
 {
 	int		x;
 	int		y;
-
 	y = 0;
 	while (y < stp->ynb)
 	{
 		x = y * stp->linelen;
 		while (x < (y + 1) * stp->linelen)
 		{
-			if (x < ( y + 1) * stp->linelen - 1)
-				ft_bresenham(stp->map.npts[x], stp->map.npts[x + 1], \
-						&stp->bres, &stp->data);
+			if (x < (y + 1) * stp->linelen - 1)
+			{
+				if (stp->clip)
+				{
+					if (!check_pts(stp->map.npts[x]) && !check_pts(stp->map.npts[x + 1]))
+						ft_bresenham(stp->map.npts[x], stp->map.npts[x + 1], \
+								&stp->bres, &stp->data);
+				}
+				else
+					ft_bresenham(stp->map.npts[x], stp->map.npts[x + 1], \
+							&stp->bres, &stp->data);
+			}
 			if (x < stp->lastrow)
-				ft_bresenham(stp->map.npts[x], stp->map.npts[x +\
-					   	stp->linelen], &stp->bres, &stp->data);
+			{
+				if (stp->clip)
+				{
+					if (!check_pts(stp->map.npts[x]) && !check_pts(stp->map.npts[x + stp->linelen]))
+						ft_bresenham(stp->map.npts[x], stp->map.npts[x +\
+							   	stp->linelen], &stp->bres, &stp->data);
+				}
+				else
+					ft_bresenham(stp->map.npts[x], stp->map.npts[x +\
+						   	stp->linelen], &stp->bres, &stp->data);
+			}
 			x++;
 		}
 		y++;

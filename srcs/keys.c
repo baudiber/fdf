@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 17:31:08 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/26 17:31:10 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/06/28 02:00:52 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ void	arrow_udlr(int key, t_setup *stp)
 	}
 	if (key == 123)
 	{
-		stp->map.scale.y /= 1.2;
+		stp->map.scale.y -= 100;
 	}
 	if (key == 124)
 	{
-		stp->map.scale.y *= 1.2;
+		stp->map.scale.y += 100;
 	}
 	redraw(stp);
 }
@@ -108,6 +108,13 @@ void	stp_rpbh(int key, t_setup *stp)
 		else
 			stp->help = 0;
 	}
+	if (key == 8)
+	{
+		if (stp->clip == 0)
+			stp->clip = 1;
+		else
+			stp->clip = 0;
+	}
 }
 
 int		stp_key(int key, t_setup *stp)
@@ -123,9 +130,11 @@ int		stp_key(int key, t_setup *stp)
 		exit (0);
 	}
 	if (stp->splash)
+	{
 		stp_rpbh(key, stp);
-	redraw(stp);
-	printf("%d\n", key);
+		redraw(stp);
+	}
+//	printf("%d\n", key);
 	return (0);
 }
 
