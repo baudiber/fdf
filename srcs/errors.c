@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 17:30:52 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/28 23:36:29 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:53:07 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,19 @@ void	ft_errors(int type)
 	}
 }
 
+/*
+** free the map arrays
+*/
+
 void	free_all(t_setup *stp)
 {
 	free(stp->map.npts);
 	free(stp->map.tpts);
 }
+
+/*
+** free the linked list
+*/
 
 void	free_ll(t_rows *head)
 {

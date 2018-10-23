@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 23:18:22 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/28 23:37:04 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/10/23 15:36:20 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	reset_view(t_setup *stp)
 	stp->scene.dot = 0;
 	stp->scene.pers = 0;
 }
+
+/*
+** main mlx function with the main loop and events
+*/
 
 void	fdf(t_setup *stp)
 {

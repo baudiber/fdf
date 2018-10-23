@@ -6,11 +6,15 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 17:31:31 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/28 23:59:12 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/10/23 17:53:13 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*
+** creates homonegeous point with given args
+*/
 
 t_hpt	hpt(float x, float y, float z, float w)
 {
@@ -23,6 +27,10 @@ t_hpt	hpt(float x, float y, float z, float w)
 	return (pt);
 }
 
+/*
+** substract two vectors
+*/
+
 t_hpt	sub_vects(t_hpt a, t_hpt b)
 {
 	t_hpt	res;
@@ -34,6 +42,10 @@ t_hpt	sub_vects(t_hpt a, t_hpt b)
 	return (res);
 }
 
+/*
+** vector cross product
+*/
+
 t_hpt	cross_product(t_hpt a, t_hpt b)
 {
 	t_hpt	res;
@@ -43,6 +55,10 @@ t_hpt	cross_product(t_hpt a, t_hpt b)
 	res.z = a.x * b.y - b.x * a.y;
 	return (res);
 }
+
+/*
+** conjugate two vectors
+*/
 
 t_hpt	conjugate(t_hpt v)
 {

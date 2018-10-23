@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 18:25:28 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/28 23:20:45 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:43:58 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	ft_bresenham1(t_bres *bres, int **img, unsigned int color)
 		bres->i++;
 	}
 }
+
+/*
+** algorithm used to draw a the straightest line between two points
+*/
 
 void	ft_bresenham(t_hpt p1, t_hpt p2, t_bres *bres, int **img)
 {

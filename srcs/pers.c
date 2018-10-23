@@ -6,11 +6,15 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 17:30:29 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/29 00:17:21 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/10/23 15:28:37 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*
+** apply DEPTH perspective on the points
+*/
 
 t_hpt		apply_pers_hpt(t_hpt p, t_scene *s)
 {
@@ -21,6 +25,10 @@ t_hpt		apply_pers_hpt(t_hpt p, t_scene *s)
 	return (p);
 }
 
+/*
+** setup the matrix that deals with rotations
+*/
+
 void		get_scene_mat(t_scene *scene)
 {
 	scene->mat = scale_mat(scene->scale);
@@ -29,6 +37,10 @@ void		get_scene_mat(t_scene *scene)
 	scene->mat = mult_4x4mat(rot_mat_z(scene->rot.z), scene->mat);
 	scene->mat = mult_4x4mat(rot_mat_pos(scene->pos), scene->mat);
 }
+
+/*
+** creates a basic lookat camera matrix
+*/
 
 t_mat4x4	look_at_mat(t_scene *s)
 {
@@ -51,6 +63,10 @@ t_mat4x4	look_at_mat(t_scene *s)
 	mat.m[2][2] = -f.z;
 	return (mat);
 }
+
+/*
+**  rotate that lookat matrix by the position of the camera
+*/
 
 t_mat4x4	get_cam_mat(t_scene *s)
 {

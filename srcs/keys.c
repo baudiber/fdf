@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 17:31:08 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/29 00:01:24 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/10/23 17:37:07 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ void	arrow_udlr(int key, t_setup *stp)
 	}
 	redraw(stp);
 }
+
+/*
+** if splash is true splash is actually off
+** main key even function that redirects others
+*/
 
 int		keys(int key, t_setup *stp)
 {

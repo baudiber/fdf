@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 00:27:28 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/28 23:52:33 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:45:59 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int		check_pts(t_hpt pt)
 		return (1);
 	return (0);
 }
+
+/*
+** this function displays the lines that fit in the screen, not the ones that
+** have one of the points outside of it
+*/
 
 void	display_linesclip(t_setup *stp)
 {

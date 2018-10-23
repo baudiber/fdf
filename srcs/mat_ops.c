@@ -6,11 +6,15 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/28 23:56:53 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/28 23:59:39 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/10/23 17:46:33 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*
+** multiply homogenenous point by 4x4 matrix
+*/
 
 t_hpt		mult_4x4mat_hpt(t_mat4x4 mat, t_hpt p)
 {
@@ -26,6 +30,10 @@ t_hpt		mult_4x4mat_hpt(t_mat4x4 mat, t_hpt p)
 			p.z + mat.m[3][3] * p.w;
 	return (res);
 }
+
+/*
+** multiply two 4x4 matrices together
+*/
 
 t_mat4x4	mult_4x4mat(t_mat4x4 m1, t_mat4x4 m2)
 {
@@ -49,6 +57,10 @@ t_mat4x4	mult_4x4mat(t_mat4x4 m1, t_mat4x4 m2)
 	}
 	return (res);
 }
+
+/*
+** creates identity matrix 
+*/
 
 t_mat4x4	id_mat(void)
 {

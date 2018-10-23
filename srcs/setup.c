@@ -6,16 +6,24 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 23:21:41 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/28 23:44:56 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/10/23 17:50:34 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/*
+** creates a mlx window with the name given as argument str
+*/
+
 void	create_window(char *str, t_setup *setup)
 {
 	setup->win_ptr = mlx_new_window(setup->mlx_ptr, WIDTH, HEIGHT, str);
 }
+
+/*
+** initialize first settings
+*/
 
 void	cam_scene_settings(t_setup *stp)
 {
@@ -30,6 +38,10 @@ void	cam_scene_settings(t_setup *stp)
 	stp->scene.dot = 0;
 	stp->scene.pers = 0;
 }
+
+/*
+** transform points so that the map fits the screen better
+*/
 
 void	transform_points(t_map *map, int ptnb, int ynb, int linelen)
 {
@@ -66,6 +78,10 @@ void	init_mlx(t_setup *stp)
 		&stp->ed);
 	stp->splash = 0;
 }
+
+/*
+** initialize first settings and get final points to display
+*/
 
 void	init_all(t_setup *stp)
 {

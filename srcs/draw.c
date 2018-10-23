@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:29:49 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/29 00:16:11 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/10/23 15:09:13 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void	reset_img(t_setup *stp)
 	}
 }
 
+/*
+** get new array of points transformed to the new coordinates
+*/
+
 void	get_new_pts(t_map *map, int len)
 {
 	int		i;
@@ -37,6 +41,7 @@ void	get_new_pts(t_map *map, int len)
 	}
 }
 
+
 void	get_map_mat(t_scene *s, t_map *map)
 {
 	if (s->pers == 0)
@@ -49,6 +54,11 @@ void	get_map_mat(t_scene *s, t_map *map)
 	map->mat = mult_4x4mat(s->mat, map->mat);
 	map->mat = mult_4x4mat(get_cam_mat(s), map->mat);
 }
+
+/*
+** get all the matrices according to new rotations, and transform all the points
+** with the new matrix
+*/
 
 void	draw(t_setup *stp)
 {
@@ -77,6 +87,10 @@ void	draw(t_setup *stp)
 			display_linesclip(stp);
 	}
 }
+
+/*
+** clear the buffer, then draw again + hud
+*/
 
 void	redraw(t_setup *stp)
 {

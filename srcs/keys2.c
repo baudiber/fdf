@@ -6,11 +6,15 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:00:24 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/29 00:01:38 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/10/23 17:40:21 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*
+** should use defines for keys here
+*/
 
 void	stp_rpbh(int key, t_setup *stp)
 {

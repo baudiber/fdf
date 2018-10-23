@@ -6,11 +6,15 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:29:44 by baudiber          #+#    #+#             */
-/*   Updated: 2018/06/28 23:52:39 by baudiber         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:49:30 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*
+** check if that point is in the screen, then draw it
+*/
 
 void	check_and_draw(int **img, t_hpt pt, unsigned int color)
 {
@@ -20,12 +24,20 @@ void	check_and_draw(int **img, t_hpt pt, unsigned int color)
 	(*img)[(int)pt.y * WIDTH + (int)pt.x] = color;
 }
 
+/*
+** move point to the middle of the screen(centers map)
+*/
+
 void	draw_dot(int **img, t_hpt pt)
 {
 	pt.x += WIDTH / 2;
 	pt.y += HEIGHT / 2;
 	check_and_draw(img, pt, pt.color);
 }
+
+/*
+** go through each points and draw lines
+*/
 
 void	display_lines(t_setup *stp)
 {
@@ -49,6 +61,10 @@ void	display_lines(t_setup *stp)
 		y++;
 	}
 }
+
+/*
+** display overlay HUD
+*/
 
 void	display_help(t_setup *stp)
 {
